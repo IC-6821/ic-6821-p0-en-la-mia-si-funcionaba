@@ -1,5 +1,3 @@
-import gameDifficulties.GameDifficulty;
-
 public class TicTacToeGame {
     private GameBoard gameBoard;
     private GameDifficulty difficulty;
@@ -10,6 +8,6 @@ public class TicTacToeGame {
     }
 
     public void computerMove(char playerPiece) {
-        //difficulty.makeMoveIA(gameBoard.getBoard(), playerPiece);
+        difficulty.makeMove(gameBoard, playerPiece);
     }
 }
