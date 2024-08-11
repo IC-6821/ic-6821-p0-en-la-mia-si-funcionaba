@@ -103,4 +103,12 @@ public class DefaultBoard implements GameBoard {
         }
         return false;
     }
+
+    @Override
+    public void placeMove(int row, int col, char symbol) { // Agregado
+        if (VerifyBoardSquareIsEmpty(row, col)) {
+            gameBoard[row][col] = symbol;
+        }
+    }
+
 }
