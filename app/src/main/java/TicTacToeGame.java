@@ -1,13 +1,24 @@
+
 public class TicTacToeGame {
     private GameBoard gameBoard;
-    private GameDifficulty difficulty;
+    private Player humanPlayer;
+    private Player computerPlayer;
 
-    public void TicTacToeGame(GameBoard gameBoard, GameDifficulty difficulty) {
+    public TicTacToeGame(GameBoard gameBoard, Player humanPlayer) {
         this.gameBoard = gameBoard;
-        this.difficulty = difficulty;
+        this.humanPlayer = humanPlayer;
+        DifficultyMenu menu = new DifficultyMenu();
+        this.computerPlayer = menu.selectDifficulty();
     }
 
-    public void computerMove(char playerPiece) {
-        difficulty.makeMove(gameBoard, playerPiece);
+    public void play() {
+        while (!gameBoard.CheckGameOver()) {
+            humanPlayer.makeMove(gameBoard);
+            if (gameBoard.CheckGameOver()) break;
+            computerPlayer.makeMove(gameBoard);
+        }
+
+        // Mostrar resultados del juego (Falta implementar)
     }
 }
+
