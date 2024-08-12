@@ -1,6 +1,6 @@
-package Players;
+package players;
 
-import Board.GameBoard;
+import board.GameBoard;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,6 @@ public class HumanPlayer implements Player {
         int col = -1;
 
         while (true) {
-            System.out.println("Ingrese su movimiento (fila columna): ");
             String input = scanner.nextLine().toLowerCase();
             String[] parts = input.split(" ");
             
@@ -41,11 +40,7 @@ public class HumanPlayer implements Player {
                 if (row != -1 && col != -1 && board.VerifyBoardSquareIsEmpty(row, col)) {
                     board.placeMove(row, col, symbol);
                     return ;
-                } else {
-                    System.out.println("Movimiento inválido. Inténtelo con otro");
                 }
-            } else {
-                System.out.println("Entrada no válida. Use el formato: fila columna");
             }
         }
     }
@@ -55,29 +50,4 @@ public class HumanPlayer implements Player {
         return symbol;
     }
 
-    private int convertToRow(String row) {
-        switch (row.toLowerCase()) {
-            case "arriba":
-                return 0;
-            case "medio":
-                return 1;
-            case "abajo":
-                return 2;
-            default:
-                return -1;
-        }
-    }
-
-    private int convertToColumn(String col) {
-        switch (col.toLowerCase()) {
-            case "izquierda":
-                return 0;
-            case "centro":
-                return 1;
-            case "derecha":
-                return 2;
-            default:
-                return -1;
-        }
-    }
 }

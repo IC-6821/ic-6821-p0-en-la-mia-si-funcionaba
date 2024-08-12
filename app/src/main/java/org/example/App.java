@@ -3,10 +3,10 @@
  */
 package org.example;
 
-import Board.DefaultBoard;
-import Board.GameBoard;
-import gameUserInterface.interfaceDesign;
-import gameUserInterface.terminalDesign;
+import board.DefaultBoard;
+import board.GameBoard;
+import gameUserInterface.UIDesign;
+import gameUserInterface.TerminalDesign;
 
 public class App {
     public String getGreeting() {
@@ -17,7 +17,7 @@ public class App {
         //System.out.println(new App().getGreeting());
         GameBoard board = new DefaultBoard();
         String status = board.BoardStatus();
-        interfaceDesign printer = new terminalDesign();
+        UIDesign printer = new TerminalDesign();
         printer.showGame(status);
     }
 }

@@ -1,7 +1,7 @@
 package gameUserInterface;
 
 //--X-Y----
-public class terminalDesign implements interfaceDesign{
+public class TerminalDesign implements UIDesign {
 
     @Override
     public void showGame(String boardStatus) {

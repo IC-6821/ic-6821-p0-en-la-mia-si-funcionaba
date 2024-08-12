@@ -1,8 +1,8 @@
-package Board;
+package board;
 
 public class DefaultBoard implements GameBoard {
     private char[][] gameBoard;
-    private final int DIMENSION = 3;
+    public static final int DIMENSION = 3;
 
     public DefaultBoard(){
         gameBoard = new char[DIMENSION][DIMENSION];
@@ -73,7 +73,7 @@ public class DefaultBoard implements GameBoard {
 
     @Override
     public boolean CheckGameWIn(char PLAYER_PIECE) {
-        if(CheckDiagonalWin(PLAYER_PIECE)==true || CheckColumnWin(PLAYER_PIECE)==true || CheckRowWin(PLAYER_PIECE)==true ){
+        if(CheckDiagonalWin(PLAYER_PIECE) || CheckColumnWin(PLAYER_PIECE) || CheckRowWin(PLAYER_PIECE)){
             return true;
         }
         return false;

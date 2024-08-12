@@ -1,5 +1,5 @@
 package gameUserInterface;
 
-public interface interfaceDesign {
+public interface UIDesign {
     void showGame(String boardStatus);
 }

@@ -1,15 +1,16 @@
-package Players;
+package players;
 
-import Board.GameBoard;
+import board.DefaultBoard;
+import board.GameBoard;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TypeOfDifficulties {
+public class ComputerPlayer {
     private char symbol;
 
-    public TypeOfDifficulties(char symbol) {
+    public ComputerPlayer(char symbol) {
         this.symbol = symbol;
     }
 
@@ -27,8 +28,8 @@ public class TypeOfDifficulties {
             List<int[]> availableMoves = new ArrayList<>();
 
             // Search for the free spaces in the board.
-            for (int row = 0; row < 3; row++) {
-                for (int col = 0; col < 3; col++) {
+            for (int row = 0; row < DefaultBoard.DIMENSION; row++) {
+                for (int col = 0; col < DefaultBoard.DIMENSION; col++) {
                     if (board.VerifyBoardSquareIsEmpty(row, col)) {
                         availableMoves.add(new int[]{row, col});
                     }
@@ -60,8 +61,8 @@ public class TypeOfDifficulties {
         }
 
         private boolean tryToWinOrBlock(GameBoard board) {
-            for (int row = 0; row < 3; row++) {
-                for (int col = 0; col < 3; col++) {
+            for (int row = 0; row < DefaultBoard.DIMENSION; row++) {
+                for (int col = 0; col < DefaultBoard.DIMENSION; col++) {
                     if (board.VerifyBoardSquareIsEmpty(row, col)) {
                         board.placeMove(row, col, symbol);
                         if (board.CheckGameWIn(symbol)) {

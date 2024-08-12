@@ -1,4 +1,4 @@
-package Board;
+package board;
 
 public interface GameBoard {
     void PlaceSpacesInGameBoard();

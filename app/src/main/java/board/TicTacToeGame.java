@@ -1,7 +1,6 @@
-package Board;
+package board;
 
-import Players.DifficultyMenu;
-import Players.Player;
+import players.Player;
 
 public class TicTacToeGame {
     private GameBoard gameBoard;
@@ -11,8 +10,6 @@ public class TicTacToeGame {
     public TicTacToeGame(GameBoard gameBoard, Player humanPlayer) {
         this.gameBoard = gameBoard;
         this.humanPlayer = humanPlayer;
-        DifficultyMenu menu = new DifficultyMenu();
-        this.computerPlayer = menu.selectDifficulty();
     }
 
     public void play() {
