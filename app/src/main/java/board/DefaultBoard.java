@@ -64,7 +64,7 @@ public class DefaultBoard implements GameBoard {
     }
 
     public boolean CheckDiagonalWin (char PLAYER_PIECE){
-        if ((CheckMainDiagonalWin(PLAYER_PIECE) == true) || (CheckSecondDiagonalWin(PLAYER_PIECE) == true)) {
+        if ((CheckMainDiagonalWin(PLAYER_PIECE)) || (CheckSecondDiagonalWin(PLAYER_PIECE))) {
             return true;
         }
         return false;
@@ -84,7 +84,7 @@ public class DefaultBoard implements GameBoard {
         for (int ROW = 0; ROW < DIMENSION; ROW++) {
             for (int COLUMN = 0; COLUMN< DIMENSION; COLUMN++) {
                 if (gameBoard[ROW][COLUMN] == ' '){
-                    return false;
+                    return true;
                 }
             }
         }
@@ -92,15 +92,15 @@ public class DefaultBoard implements GameBoard {
     }
     @Override
     public boolean CheckTie() {
-        if(CheckFreeSpaces()== false || CheckGameWIn('X')== false || CheckGameWIn('O')== false){
-            return false;
+        if( !CheckFreeSpaces() && !CheckGameWIn('X') && !CheckGameWIn('O')){
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean CheckGameOver() {
-        if(CheckTie()==true ||  CheckGameWIn('X')== true || CheckGameWIn('O')== true){
+        if(CheckTie()||  CheckGameWIn('X') || CheckGameWIn('O')){
             return true;
         }
         return false;
