@@ -2,6 +2,8 @@ package Players;
 
 import Board.GameBoard;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class TypeOfDifficulties {
@@ -13,6 +15,8 @@ public class TypeOfDifficulties {
 
     public static class EasyDifficulty implements Player {
         private char symbol;
+        // Unique seed of the game.
+        private static Random rand = new Random();
 
         public EasyDifficulty(char symbol) {
             this.symbol = symbol;
@@ -20,20 +24,25 @@ public class TypeOfDifficulties {
 
         @Override
         public void makeMove(GameBoard board) {
-            Random rand = new Random();
-            int row, colum;
-            do {
-                row = rand.nextInt(3);
-                colum = rand.nextInt(3);
-            } while (!board.VerifyBoardSquareIsEmpty(row, colum));
+            List<int[]> availableMoves = new ArrayList<>();
 
-            board.placeMove(row, colum, symbol);
+            // Search for the free spaces in the board.
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    if (board.VerifyBoardSquareIsEmpty(row, col)) {
+                        availableMoves.add(new int[]{row, col});
+                    }
+                }
+            }
+            int[] move = availableMoves.get(rand.nextInt(availableMoves.size()));
+            board.placeMove(move[0], move[1], symbol);
         }
 
         @Override
         public char getSymbol() {
             return symbol;
         }
+
     }
 
     public static class MediumDifficulty implements Player {
