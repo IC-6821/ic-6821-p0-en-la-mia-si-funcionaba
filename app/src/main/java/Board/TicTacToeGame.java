@@ -1,3 +1,7 @@
+package Board;
+
+import Players.DifficultyMenu;
+import Players.Player;
 
 public class TicTacToeGame {
     private GameBoard gameBoard;

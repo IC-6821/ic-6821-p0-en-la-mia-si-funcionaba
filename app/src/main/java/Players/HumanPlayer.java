@@ -1,3 +1,7 @@
+package Players;
+
+import Board.GameBoard;
+
 import java.util.Scanner;
 
 public class HumanPlayer implements Player {

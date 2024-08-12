@@ -1,3 +1,7 @@
+package Players;
+
+import Board.GameBoard;
+
 import java.util.Random;
 
 public class TypeOfDifficulties {

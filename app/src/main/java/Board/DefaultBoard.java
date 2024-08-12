@@ -1,3 +1,5 @@
+package Board;
+
 public class DefaultBoard implements GameBoard {
     private char[][] gameBoard;
     private final int DIMENSION = 3;
@@ -102,6 +104,17 @@ public class DefaultBoard implements GameBoard {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String BoardStatus() {
+        String boardChars="";
+        for (int ROWS = 0; ROWS < DIMENSION; ROWS++) {
+            for (int COLUMNS  = 0; COLUMNS < DIMENSION; COLUMNS++) {
+                boardChars.concat(String.valueOf(gameBoard[ROWS][COLUMNS]));
+            }
+        }
+        return boardChars;
     }
 
     @Override

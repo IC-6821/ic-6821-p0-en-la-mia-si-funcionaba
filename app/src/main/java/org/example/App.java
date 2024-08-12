@@ -3,12 +3,21 @@
  */
 package org.example;
 
+import Board.DefaultBoard;
+import Board.GameBoard;
+import gameUserInterface.interfaceDesign;
+import gameUserInterface.terminalDesign;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        //System.out.println(new App().getGreeting());
+        GameBoard board = new DefaultBoard();
+        String status = board.BoardStatus();
+        interfaceDesign printer = new terminalDesign();
+        printer.showGame(status);
     }
 }
