@@ -34,7 +34,7 @@ public class HumanPlayer implements Player {
 
         while(true){
 
-            System.out.println("\nINGRESE SU MOVIMIENTO");
+            System.out.println("\nINGRESE SU MOVIMIENTO: ");
             String input = SCANNER.nextLine().toLowerCase();
             String[] parts = input.split(" ");
 
@@ -42,12 +42,8 @@ public class HumanPlayer implements Player {
                 row = positions.getOrDefault(parts[0], -1); // Searches for the input's horizontal coordinate equivalent inside the dictionary
                 col = positions.getOrDefault(parts[1], -1); // Searches for the input's vertical coordinate equivalent inside the dictionary
                 int[] x = {row,col};
-                System.out.println(x[1]);
                 return new int[]{row,col};
             }
-
-
         }
     }
-
 }
