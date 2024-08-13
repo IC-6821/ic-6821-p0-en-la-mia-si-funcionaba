@@ -40,6 +40,7 @@ public class Game {
                 case 0:
 
                     HumanPlayerMove('X');
+                    turn++;
                     if (gameBoard.CheckGameWin('X')) {
                         System.out.println("Has ganado!");
                         turn = 10; // When a victory is detected, ends the loop
@@ -48,6 +49,7 @@ public class Game {
                 case 1:
 
                     ComputerPlayerMove('O');
+                    turn++;
                     if (gameBoard.CheckGameWin('O')) {
                         System.out.println("Has perdido!");
                         turn = 10; // When a victory is detected, ends the loop
@@ -80,7 +82,7 @@ public class Game {
         int[] positions = computerPlayer.MakeMove(gameBoard);
 
         if (!gameBoard.placeMove(positions[0], positions[1], playerSymbol)) {
-            System.out.println("error movimiento de maquina invalido");
+            System.out.println("Error, movimiento de maquina invalido");
         }
     }
 
