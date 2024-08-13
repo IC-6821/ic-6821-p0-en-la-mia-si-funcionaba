@@ -8,7 +8,8 @@ import gameUserInterface.TerminalDesign;
 
 public class Game {
 
-    // The game is going to use 4 objects, so we declare them inside the main Game class
+    // The game is going to use 4 objects, so we declare them inside the main Game
+    // class
 
     private TerminalDesign terminalDesign;
     private GameBoard gameBoard;
@@ -20,65 +21,67 @@ public class Game {
         this.terminalDesign = new TerminalDesign();
         this.gameBoard = new GameBoard();
         this.humanPlayer = new HumanPlayer('X');
-        this.computerPlayer = new ComputerPlayer('O', difficulty); // Difficulty was given by user input in the main function "String[] args"
+        this.computerPlayer = new ComputerPlayer('O', difficulty); // Difficulty was given by user input in the main
+                                                                   // function "String[] args"
 
     }
 
     public void Play() { // Function that dictates the flow of the game
 
-        int turn = 0; // Using this as a flag to distiguish between User and computer so we don´t need to access any constants inside the player's class.
-        char playerSymbol;
+        int turn = 0;
 
-        while(turn < 9){    // QUERIDO PROFE, ESTO ES CÓDIGO ESPAGUETTI, PERO HONESTAMENTE ESTAMOS TOSTADOS COMO PARA MODULARIZARLO, PROMETEMOS HACERLO
-                            // PARA LA ENTREGA FINAL, ATTE: EQUIPO DE REVISIÓN :)
+        while (turn < 9) {
 
-                            // PDD: APRENDIMOS LA LECCIÓN, HAY QUE PLANEAR BIEN AL INICIO...
-            System.out.println(turn);
-            if(turn % 2 == 0){
+            System.out.println("Turno numero:" + turn);
 
-                
+            terminalDesign.showGame(gameBoard.BoardCellsToString());
 
-                playerSymbol = 'X';
-                terminalDesign.showGame(gameBoard.BoardCellsToString()); // Show the current board to the user
-                int[] positions = humanPlayer.MakeMove(gameBoard);
+            switch (turn % 2) { // alternates between player and computer turns
+                case 0:
 
-                if(gameBoard.placeMove(positions[0], positions[1], playerSymbol)){
-                    turn++;
-                    if(gameBoard.CheckGameWin(playerSymbol)){
+                    HumanPlayerMove('X');
+                    if (gameBoard.CheckGameWin('X')) {
                         System.out.println("Has ganado!");
-                        break;
+                        turn = 10; // When a victory is detected, ends the loop
                     }
-                    continue;
-                }
 
-                System.out.println("Por favor ingrese un movimiento válido");
+                case 1:
 
-            }else{
-
-                playerSymbol = 'O';
-                int[] positions = computerPlayer.MakeMove(gameBoard); //NECESARIO PASAR ESPACIOS LIBRES POR MEDIO DEL TABLERO
-
-                if(gameBoard.placeMove(positions[0], positions[1], playerSymbol)){
-                    turn++;
-                    if(gameBoard.CheckGameWin(playerSymbol)){
+                    ComputerPlayerMove('O');
+                    if (gameBoard.CheckGameWin('O')) {
                         System.out.println("Has perdido!");
-                        break;
+                        turn = 10; // When a victory is detected, ends the loop
                     }
-                }else{
-                    System.out.println("LA CAGAMOS, ESTO NO DEBERÍA DAR ERROR - MOVIMIENTO DE MÁQUINA");
-                }
             }
+
         }
-        if(turn == 9){
+        if (turn == 9) { // If a victory is not registered, it's a tie
             System.out.println("Ha sido un empate");
         }
     }
 
-    private void HumanPlayerMove() {
+    private void HumanPlayerMove(char playerSymbol) {
+        boolean validMove = false;
+        while (!validMove) {
+
+            int[] positions = humanPlayer.MakeMove(gameBoard);
+            validMove = gameBoard.placeMove(positions[0], positions[1], playerSymbol); // validates player's movement
+
+            if (!validMove) {
+                System.out.println("Por favor ingrese un movimiento válido");
+            }
+
+        }
 
     }
 
-    private void ComputerPlayerMove() {
+    private void ComputerPlayerMove(char playerSymbol) {
 
+        int[] positions = computerPlayer.MakeMove(gameBoard);
+
+        if (!gameBoard.placeMove(positions[0], positions[1], playerSymbol)) {
+            System.out.println("error movimiento de maquina invalido");
+        }
     }
+
 }
