@@ -7,8 +7,7 @@ import java.util.Random;
 
 public class ComputerPlayer implements Player {
 
-    // Unique seed of the game for the difficulties.
-    private Random rand = new Random();
+    private Random rand = new Random(); // Unique seed of the game for the difficulties.
     private char symbol;
     private String difficulty;
 

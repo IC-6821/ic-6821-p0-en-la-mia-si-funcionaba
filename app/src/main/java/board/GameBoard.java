@@ -92,7 +92,7 @@ public class GameBoard {
         String boardChars="";
         for (int row = 0; row < DIMENSION; row++) {
             for (int column  = 0; column < DIMENSION; column++) {
-                boardChars.concat(String.valueOf(gameBoard[row][column]));
+                boardChars = boardChars.concat(String.valueOf(gameBoard[row][column]));
             }
         }
         return boardChars;
@@ -101,6 +101,7 @@ public class GameBoard {
     
     public boolean placeMove(int row, int col, char symbol) { // Agregado
         if (VerifyBoardSquareIsEmpty(row, col)) {
+
             gameBoard[row][col] = symbol;
             return true;
         }

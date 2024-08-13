@@ -14,6 +14,6 @@ public class TerminalDesign implements UIDesign {
         System.out.print(" "+boardStatusAux[3]+" | "+boardStatusAux[4]+" | "+boardStatusAux[5]);
         System.out.print("\n-----------\n");
         System.out.print(" "+boardStatusAux[6]+" | "+boardStatusAux[7]+" | "+boardStatusAux[8]);
-
+        System.out.print("\n");
     }
 }
