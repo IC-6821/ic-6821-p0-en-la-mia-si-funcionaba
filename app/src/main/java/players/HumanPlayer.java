@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import board.GameBoard;
+import gameLogic.Game;
 
 public class HumanPlayer implements Player {
     private final char SYMBOL;
@@ -26,22 +27,24 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public int[] makeMove() {
+    public int[] MakeMove(GameBoard board) {
 
         int row = -1;
         int col = -1;
 
         while(true){
 
+            System.out.println("INGRESE");
             String input = SCANNER.nextLine().toLowerCase();
             String[] parts = input.split(" ");
 
             if (parts.length == 2) {
                 row = positions.getOrDefault(parts[0], -1); // Searches for the input's horizontal coordinate equivalent inside the dictionary
                 col = positions.getOrDefault(parts[1], -1); // Searches for the input's vertical coordinate equivalent inside the dictionary
+                return new int[]{row,col};
             }
 
-            return new int[]{row,col};
+
         }
     }
 

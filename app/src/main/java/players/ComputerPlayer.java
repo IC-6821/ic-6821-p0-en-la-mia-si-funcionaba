@@ -1,13 +1,14 @@
 package players;
 
 import board.GameBoard;
-import players.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class ComputerPlayer implements Player {
+
+    // Unique seed of the game for the difficulties.
+    private Random rand = new Random();
     private char symbol;
     private String difficulty;
 
@@ -17,40 +18,39 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
-    public int[] makeMove() {
-        return new int[0];
+    public int[] MakeMove(GameBoard gameBoard) {
+
+        int[] x = {2,1};
+
+        switch (difficulty){
+            case "f":
+                return EasyDifficulty(gameBoard);
+            case "m":
+                return x;
+            case "d":
+                return x;
+            default:
+                System.out.println("TA MALA WEONAO");
+                return x;
+        }
     }
-    
-//
-//    public static class EasyDifficulty implements Player {
-//
-//        private char symbol;
-//        // Unique seed of the game.
-//        private static Random rand = new Random();
-//
-//        public EasyDifficulty(char symbol) {
-//            this.symbol = symbol;
-//        }
-//
-//        @Override
-//        public void makeMove(GameBoard board) {
-//            List<int[]> availableMoves = new ArrayList<>();
-//
-//            // Search for the free spaces in the board.
-//            for (int row = 0; row < GameBoard.DIMENSION; row++) {
-//                for (int col = 0; col < GameBoard.DIMENSION; col++) {
-//                    if (board.VerifyBoardSquareIsEmpty(row, col)) {
-//                        availableMoves.add(new int[]{row, col});
-//                    }
-//                }
-//            }
-//            int[] move = availableMoves.get(rand.nextInt(availableMoves.size()));
-//            board.placeMove(move[0], move[1], symbol);
-//        }
-//
-//
-//    }
-//
+
+    public int[] EasyDifficulty(GameBoard board) {
+
+        List<int[]> availableMoves = new ArrayList<>();
+
+        // Search for the free spaces in the board.
+        for (int row = 0; row < GameBoard.DIMENSION; row++) {
+            for (int col = 0; col < GameBoard.DIMENSION; col++) {
+                if (board.VerifyBoardSquareIsEmpty(row, col)) {
+                    availableMoves.add(new int[]{row, col});
+                }
+            }
+        }
+        int[] moveCoordinates = availableMoves.get(rand.nextInt(availableMoves.size()));
+        return moveCoordinates;
+    }
+
 //    public static class MediumDifficulty implements Player {
 //        private char symbol;
 //

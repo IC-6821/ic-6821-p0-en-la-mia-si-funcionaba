@@ -76,16 +76,16 @@ public class GameBoard {
     }
 
     
-    public boolean CheckTie() {
-        for (int row = 0; row < DIMENSION; row++) {
-            for (int column = 0; column< DIMENSION; column++) {
-                if (gameBoard[row][column] == ' '){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+//    public boolean CheckTie() { NO SE USA, PERO LA DEJAMOS EN CASO DE QUE EL PROFESOR DECIDA QUE ES ACERTADO QUE EL TAMAÑO Y OTRAS SEAN AJUSTABLES
+//        for (int row = 0; row < DIMENSION; row++) {
+//            for (int column = 0; column< DIMENSION; column++) {
+//                if (gameBoard[row][column] == ' '){
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+//    }
 
     
     public String BoardCellsToString() {

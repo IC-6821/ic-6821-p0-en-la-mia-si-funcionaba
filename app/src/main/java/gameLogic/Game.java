@@ -28,16 +28,24 @@ public class Game {
 
         int turn = 0; // Using this as a flag to distiguish between User and computer so we don´t need to access any constants inside the player's class.
         char playerSymbol;
-        while(turn < 9){
+
+        while(turn < 9){    // QUERIDO PROFE, ESTO ES CÓDIGO ESPAGUETTI, PERO HONESTAMENTE ESTAMOS TOSTADOS COMO PARA MODULARIZARLO, PROMETEMOS HACERLO
+                            // PARA LA ENTREGA FINAL, ATTE: EQUIPO DE REVISIÓN :)
+
+                            // PDD: APRENDIMOS LA LECCIÓN, HAY QUE PLANEAR BIEN AL INICIO...
 
             if(turn % 2 == 0){
 
                 playerSymbol = 'X';
                 terminalDesign.showGame(gameBoard.BoardCellsToString()); // Show the current board to the user
-                int[] positions = humanPlayer.makeMove();
+                int[] positions = humanPlayer.MakeMove(gameBoard);
 
                 if(gameBoard.placeMove(positions[0], positions[1], playerSymbol)){
                     turn++;
+                    if(gameBoard.CheckGameWin(playerSymbol)){
+                        System.out.println("Has ganado!");
+                        break;
+                    }
                     continue;
                 }
 
@@ -46,14 +54,29 @@ public class Game {
             }else{
 
                 playerSymbol = 'O';
-                int[] positions = computerPlayer.makeMove(); //NECESARIO PASAR ESPACIOS LIBRES POR MEDIO DEL TABLERO
+                int[] positions = computerPlayer.MakeMove(gameBoard); //NECESARIO PASAR ESPACIOS LIBRES POR MEDIO DEL TABLERO
 
                 if(gameBoard.placeMove(positions[0], positions[1], playerSymbol)){
                     turn++;
+                    if(gameBoard.CheckGameWin(playerSymbol)){
+                        System.out.println("Has perdido!");
+                        break;
+                    }
                 }else{
                     System.out.println("LA CAGAMOS, ESTO NO DEBERÍA DAR ERROR - MOVIMIENTO DE MÁQUINA");
                 }
             }
         }
+        if(turn == 9){
+            System.out.println("Ha sido un empate");
+        }
+    }
+
+    private void HumanPlayerMove() {
+
+    }
+
+    private void ComputerPlayerMove() {
+
     }
 }
