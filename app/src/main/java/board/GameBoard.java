@@ -1,6 +1,7 @@
 package board;
 
 public class GameBoard {
+
     private char[][] gameBoard;
     public static final int DIMENSION = 3;
 
@@ -66,7 +67,6 @@ public class GameBoard {
         }
         return false;
     }
-
     
     public boolean CheckGameWin(char playerPiece) {
         if(CheckDiagonalWin(playerPiece) || CheckColumnWin(playerPiece) || CheckRowWin(playerPiece)){
@@ -74,7 +74,6 @@ public class GameBoard {
         }
         return false;
     }
-
     
 //    public boolean CheckTie() { NO SE USA, PERO LA DEJAMOS EN CASO DE QUE EL PROFESOR DECIDA QUE ES ACERTADO QUE EL TAMAÑO Y OTRAS SEAN AJUSTABLES
 //        for (int row = 0; row < DIMENSION; row++) {
@@ -86,7 +85,6 @@ public class GameBoard {
 //        }
 //        return true;
 //    }
-
     
     public String BoardCellsToString() {
         String boardChars="";
@@ -97,9 +95,8 @@ public class GameBoard {
         }
         return boardChars;
     }
-
     
-    public boolean placeMove(int row, int col, char symbol) { // Agregado
+    public boolean placeMove(int row, int col, char symbol) {
         if (VerifyBoardSquareIsEmpty(row, col)) {
 
             gameBoard[row][col] = symbol;
@@ -107,4 +104,3 @@ public class GameBoard {
         }
         return false;
     }
-}

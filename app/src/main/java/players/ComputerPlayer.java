@@ -32,9 +32,11 @@ public class ComputerPlayer implements Player {
     }
 
     public int[] EasyDifficulty(GameBoard board) {
+        
         List<int[]> availableMoves = new ArrayList<>();
 
-        // Busca los espacios libres en el tablero
+        // Searches for empty spaces in the board
+        
         for (int row = 0; row < GameBoard.DIMENSION; row++) {
             for (int col = 0; col < GameBoard.DIMENSION; col++) {
                 if (board.VerifyBoardSquareIsEmpty(row, col)) {
@@ -43,39 +45,41 @@ public class ComputerPlayer implements Player {
             }
         }
 
-        // Selecciona un movimiento aleatorio
-        return availableMoves.get(rand.nextInt(availableMoves.size()));
+        return availableMoves.get(rand.nextInt(availableMoves.size())); // Returns a random movement from the available ones
     }
 
     public int[] MediumDifficulty(GameBoard board) {
-        // Busca si puede ganar o bloquear al oponente
+
+        // Checks if it can win or block the opponent
+        
         for (int row = 0; row < GameBoard.DIMENSION; row++) {
             for (int col = 0; col < GameBoard.DIMENSION; col++) {
+
                 if (board.VerifyBoardSquareIsEmpty(row, col)) {
-                    // Intenta colocar la pieza en la posición
+                    
                     board.placeMove(row, col, symbol);
-                    if (board.CheckGameWin(symbol)) {
-                        return new int[]{row, col}; // Gana
+
+                    if (board.CheckGameWin(symbol)) { // In case that specific movement wins, it returns that movement
+                        return new int[]{row, col}; 
                     } else {
-                        board.placeMove(row, col, ' '); // Deshace el movimiento
+                        board.placeMove(row, col, ' '); // Else, it removes that movement
                     }
                 }
             }
         }
 
-        // Si no puede ganar ni bloquear, realiza un movimiento aleatorio como en EasyDifficulty
+        // If it couldn't win, places a random movement using EasyDifficulty
+
         return EasyDifficulty(board);
     }
 
     public int[] HardDifficulty(GameBoard board) {
-        //Falta por implementar la dificultad dificil
-
+        // Yet to be implemented
         return null;
     }
 
     private int minimax(GameBoard board, int depth, boolean isMaximizing) {
-        //Falta por implementar
-
+        // Yet to be implemented
         return depth;
     }
 }

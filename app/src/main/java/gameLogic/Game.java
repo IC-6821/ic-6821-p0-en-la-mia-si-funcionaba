@@ -33,7 +33,6 @@ public class Game {
         while (turn < 9) {
 
             System.out.println("Turno numero:" + turn);
-
             terminalDesign.showGame(gameBoard.BoardCellsToString());
 
             switch (turn % 2) { // alternates between player and computer turns
@@ -55,7 +54,6 @@ public class Game {
                         turn = 10; // When a victory is detected, ends the loop
                     }
             }
-
         }
         if (turn == 9) { // If a victory is not registered, it's a tie
             System.out.println("Ha sido un empate");
@@ -63,7 +61,9 @@ public class Game {
     }
 
     private void HumanPlayerMove(char playerSymbol) {
+        
         boolean validMove = false;
+        
         while (!validMove) {
 
             int[] positions = humanPlayer.MakeMove(gameBoard);
@@ -72,9 +72,7 @@ public class Game {
             if (!validMove) {
                 System.out.println("Por favor ingrese un movimiento válido");
             }
-
         }
-
     }
 
     private void ComputerPlayerMove(char playerSymbol) {
@@ -85,5 +83,4 @@ public class Game {
             System.out.println("Error, movimiento de maquina invalido");
         }
     }
-
 }
