@@ -33,8 +33,10 @@ public class Game {
                             // PARA LA ENTREGA FINAL, ATTE: EQUIPO DE REVISIÓN :)
 
                             // PDD: APRENDIMOS LA LECCIÓN, HAY QUE PLANEAR BIEN AL INICIO...
-
+            System.out.println(turn);
             if(turn % 2 == 0){
+
+                
 
                 playerSymbol = 'X';
                 terminalDesign.showGame(gameBoard.BoardCellsToString()); // Show the current board to the user
