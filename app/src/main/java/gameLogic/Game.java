@@ -41,18 +41,22 @@ public class Game {
                     HumanPlayerMove('X');
                     turn++;
                     if (gameBoard.CheckGameWin('X')) {
+                        terminalDesign.showGame(gameBoard.BoardCellsToString());
                         System.out.println("Has ganado!");
                         turn = 10; // When a victory is detected, ends the loop
                     }
+                    break;
 
                 case 1:
 
                     ComputerPlayerMove('O');
                     turn++;
                     if (gameBoard.CheckGameWin('O')) {
+                        terminalDesign.showGame(gameBoard.BoardCellsToString());
                         System.out.println("Has perdido!");
                         turn = 10; // When a victory is detected, ends the loop
                     }
+                    break;
             }
         }
         if (turn == 9) { // If a victory is not registered, it's a tie
