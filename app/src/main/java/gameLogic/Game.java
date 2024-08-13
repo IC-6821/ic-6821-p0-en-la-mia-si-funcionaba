@@ -24,11 +24,14 @@ public class Game {
 
     }
 
-    public void play() { // Function that dictates the flow of the game
-
+    public void Play() { // Function that dictates the flow of the game
         terminalDesign.showGame(gameBoard.BoardCellsToString());
-
-        System.out.println("");
+        Boolean isValid = false;
+        // Player turn
+        do{
+            Integer[] positions = humanPlayer.makeMove();
+            isValid = gameBoard.placeMove(positions[0], positions[1], SYMBOL);
+        }while (isValid);
 
     }
 }
