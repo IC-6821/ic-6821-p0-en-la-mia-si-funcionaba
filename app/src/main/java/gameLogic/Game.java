@@ -25,13 +25,35 @@ public class Game {
     }
 
     public void Play() { // Function that dictates the flow of the game
-        terminalDesign.showGame(gameBoard.BoardCellsToString());
-        Boolean isValid = false;
-        // Player turn
-        do{
-            Integer[] positions = humanPlayer.makeMove();
-            isValid = gameBoard.placeMove(positions[0], positions[1], SYMBOL);
-        }while (isValid);
 
+        int turn = 0; // Using this as a flag to distiguish between User and computer so we don´t need to access any constants inside the player's class.
+        char playerSymbol;
+        while(turn < 9){
+
+            if(turn % 2 == 0){
+
+                playerSymbol = 'X';
+                terminalDesign.showGame(gameBoard.BoardCellsToString()); // Show the current board to the user
+                int[] positions = humanPlayer.makeMove();
+
+                if(gameBoard.placeMove(positions[0], positions[1], playerSymbol)){
+                    turn++;
+                    continue;
+                }
+
+                System.out.println("Por favor ingrese un movimiento válido");
+
+            }else{
+
+                playerSymbol = 'O';
+                int[] positions = computerPlayer.makeMove(); //NECESARIO PASAR ESPACIOS LIBRES POR MEDIO DEL TABLERO
+
+                if(gameBoard.placeMove(positions[0], positions[1], playerSymbol)){
+                    turn++;
+                }else{
+                    System.out.println("LA CAGAMOS, ESTO NO DEBERÍA DAR ERROR - MOVIMIENTO DE MÁQUINA");
+                }
+            }
+        }
     }
 }

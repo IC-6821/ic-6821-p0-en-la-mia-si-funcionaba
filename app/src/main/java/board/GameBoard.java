@@ -44,7 +44,7 @@ public class GameBoard {
 
     public boolean CheckMainDiagonalWin (char playerPiece){
         for (int rowAndColumn = 0; rowAndColumn<DIMENSION; rowAndColumn++) {
-           if ( gameBoard[rowAndColumn][rowAndColumn] != playerPiece) {
+           if (gameBoard[rowAndColumn][rowAndColumn] != playerPiece) {
                return false;
            }
         }
@@ -68,7 +68,7 @@ public class GameBoard {
     }
 
     
-    public boolean CheckGameWIn(char playerPiece) {
+    public boolean CheckGameWin(char playerPiece) {
         if(CheckDiagonalWin(playerPiece) || CheckColumnWin(playerPiece) || CheckRowWin(playerPiece)){
             return true;
         }
@@ -99,9 +99,11 @@ public class GameBoard {
     }
 
     
-    public void placeMove(int row, int col, char symbol) { // Agregado
+    public boolean placeMove(int row, int col, char symbol) { // Agregado
         if (VerifyBoardSquareIsEmpty(row, col)) {
             gameBoard[row][col] = symbol;
+            return true;
         }
+        return false;
     }
 }

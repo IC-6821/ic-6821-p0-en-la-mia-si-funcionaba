@@ -16,6 +16,7 @@ public class HumanPlayer implements Player {
         this.SCANNER = new Scanner(System.in);
 
         // We add the positions with their respective value.
+
         this.positions.put("arriba", 0);
         this.positions.put("medio", 1);
         this.positions.put("abajo", 2);
@@ -25,29 +26,23 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public void makeMove(GameBoard board) {
+    public int[] makeMove() {
+
         int row = -1;
         int col = -1;
 
-        while (true) {
+        while(true){
+
             String input = SCANNER.nextLine().toLowerCase();
             String[] parts = input.split(" ");
-            
-            if (parts.length == 2) {
-                row = positions.getOrDefault(parts[0], -1);
-                col = positions.getOrDefault(parts[1], -1);
-                
-                if (row != -1 && col != -1 && board.VerifyBoardSquareIsEmpty(row, col)) {
-                    board.placeMove(row, col, SYMBOL);
-                    return ;
-                }
-            }
-        }
-    }
 
-    @Override
-    public char getSymbol() {
-        return SYMBOL;
+            if (parts.length == 2) {
+                row = positions.getOrDefault(parts[0], -1); // Searches for the input's horizontal coordinate equivalent inside the dictionary
+                col = positions.getOrDefault(parts[1], -1); // Searches for the input's vertical coordinate equivalent inside the dictionary
+            }
+
+            return new int[]{row,col};
+        }
     }
 
 }

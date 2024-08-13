@@ -17,14 +17,10 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
-    public void makeMove(GameBoard board) {
-
+    public int[] makeMove() {
+        return new int[0];
     }
-
-    @Override
-    public char getSymbol() {
-        return 0;
-    }
+    
 //
 //    public static class EasyDifficulty implements Player {
 //
@@ -52,10 +48,6 @@ public class ComputerPlayer implements Player {
 //            board.placeMove(move[0], move[1], symbol);
 //        }
 //
-//        @Override
-//        public char getSymbol() {
-//            return symbol;
-//        }
 //
 //    }
 //
