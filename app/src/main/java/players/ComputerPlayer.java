@@ -18,27 +18,23 @@ public class ComputerPlayer implements Player {
 
     @Override
     public int[] MakeMove(GameBoard gameBoard) {
-
-        int[] x = {2,1};
-
-        switch (difficulty){
+        switch (difficulty) {
             case "f":
                 return EasyDifficulty(gameBoard);
             case "m":
-                return x;
+                return MediumDifficulty(gameBoard);
             case "d":
-                return x;
+                return HardDifficulty(gameBoard);
             default:
-                System.out.println("TA MALA WEONAO");
-                return x;
+                System.out.println("Dificultad invalida.");
+                return new int[]{-1, -1};
         }
     }
 
     public int[] EasyDifficulty(GameBoard board) {
-
         List<int[]> availableMoves = new ArrayList<>();
 
-        // Search for the free spaces in the board.
+        // Busca los espacios libres en el tablero
         for (int row = 0; row < GameBoard.DIMENSION; row++) {
             for (int col = 0; col < GameBoard.DIMENSION; col++) {
                 if (board.VerifyBoardSquareIsEmpty(row, col)) {
@@ -46,86 +42,40 @@ public class ComputerPlayer implements Player {
                 }
             }
         }
-        int[] moveCoordinates = availableMoves.get(rand.nextInt(availableMoves.size()));
-        return moveCoordinates;
+
+        // Selecciona un movimiento aleatorio
+        return availableMoves.get(rand.nextInt(availableMoves.size()));
     }
 
-//    public static class MediumDifficulty implements Player {
-//        private char symbol;
-//
-//        public MediumDifficulty(char symbol) {
-//            this.symbol = symbol;
-//        }
-//
-//        @Override
-//        public void makeMove(GameBoard board) {
-//            if (!tryToWinOrBlock(board)) {
-//                new EasyDifficulty(symbol).makeMove(board); // Si no puede ganar o bloquear, hace un movimiento fácil
-//            }
-//        }
-//
-//        private boolean tryToWinOrBlock(GameBoard board) {
-//            for (int row = 0; row < GameBoard.DIMENSION; row++) {
-//                for (int col = 0; col < GameBoard.DIMENSION; col++) {
-//                    if (board.VerifyBoardSquareIsEmpty(row, col)) {
-//                        board.placeMove(row, col, symbol);
-//                        if (board.CheckGameWIn(symbol)) {
-//                            return true;
-//                        } else {
-//                            board.placeMove(row, col, ' '); // Quita el movimiento
-//                        }
-//                    }
-//                }
-//            }
-//            return false;
-//        }
-//
-//        @Override
-//        public char getSymbol() {
-//            return symbol;
-//        }
-//    }
-//
-//    public static class HardDifficulty implements Player {
-//        private char symbol;
-//
-//        public HardDifficulty(char symbol) {
-//            this.symbol = symbol;
-//        }
-//
-//        @Override
-//        public void makeMove(GameBoard board) {
-//            int bestRow = -1;
-//            int bestCol = -1;
-//            int bestScore = Integer.MIN_VALUE;
-//
-//            for (int row = 0; row < 3; row++) {
-//                for (int col = 0; col < 3; col++) {
-//                    if (board.VerifyBoardSquareIsEmpty(row, col)) {
-//                        board.placeMove(row, col, symbol);
-//                        int score = minimax(board, 0, false);
-//                        board.placeMove(row, col, ' '); // Deshacer el movimiento
-//
-//                        if (score > bestScore) {
-//                            bestScore = score;
-//                            bestRow = row;
-//                            bestCol = col;
-//                        }
-//                    }
-//                }
-//            }
-//
-//            board.placeMove(bestRow, bestCol, symbol);
-//        }
-//
-//        private int minimax(GameBoard board, int depth, boolean isMaximizing) {
-//            // Falta implementar
-//            return 0;
-//        }
-//
-//        @Override
-//        public char getSymbol() {
-//            return symbol;
-//        }
-//    }
+    public int[] MediumDifficulty(GameBoard board) {
+        // Busca si puede ganar o bloquear al oponente
+        for (int row = 0; row < GameBoard.DIMENSION; row++) {
+            for (int col = 0; col < GameBoard.DIMENSION; col++) {
+                if (board.VerifyBoardSquareIsEmpty(row, col)) {
+                    // Intenta colocar la pieza en la posición
+                    board.placeMove(row, col, symbol);
+                    if (board.CheckGameWin(symbol)) {
+                        return new int[]{row, col}; // Gana
+                    } else {
+                        board.placeMove(row, col, ' '); // Deshace el movimiento
+                    }
+                }
+            }
+        }
+
+        // Si no puede ganar ni bloquear, realiza un movimiento aleatorio como en EasyDifficulty
+        return EasyDifficulty(board);
+    }
+
+    public int[] HardDifficulty(GameBoard board) {
+        //Falta por implementar la dificultad dificil
+
+        return null;
+    }
+
+    private int minimax(GameBoard board, int depth, boolean isMaximizing) {
+        //Falta por implementar
+
+        return depth;
+    }
 }
