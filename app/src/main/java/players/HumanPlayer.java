@@ -1,20 +1,20 @@
 package players;
 
-import board.GameBoard;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import board.GameBoard;
 
 public class HumanPlayer implements Player {
-    private char symbol;
-    private final Scanner scanner;
-    private final Map<String, Integer> positions = new HashMap<>();
+    private final char SYMBOL;
+    private final Scanner SCANNER;
+    private Map<String, Integer> positions = new HashMap<>();
 
     public HumanPlayer(char symbol) {
-        this.symbol = symbol;
+        this.SYMBOL = symbol;
 
-        this.scanner = new Scanner(System.in);
+        this.SCANNER = new Scanner(System.in);
+
         // We add the positions with their respective value.
         this.positions.put("arriba", 0);
         this.positions.put("medio", 1);
@@ -30,7 +30,7 @@ public class HumanPlayer implements Player {
         int col = -1;
 
         while (true) {
-            String input = scanner.nextLine().toLowerCase();
+            String input = SCANNER.nextLine().toLowerCase();
             String[] parts = input.split(" ");
             
             if (parts.length == 2) {
@@ -38,7 +38,7 @@ public class HumanPlayer implements Player {
                 col = positions.getOrDefault(parts[1], -1);
                 
                 if (row != -1 && col != -1 && board.VerifyBoardSquareIsEmpty(row, col)) {
-                    board.placeMove(row, col, symbol);
+                    board.placeMove(row, col, SYMBOL);
                     return ;
                 }
             }
@@ -47,7 +47,7 @@ public class HumanPlayer implements Player {
 
     @Override
     public char getSymbol() {
-        return symbol;
+        return SYMBOL;
     }
 
 }
