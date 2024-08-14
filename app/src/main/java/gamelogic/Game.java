@@ -1,10 +1,10 @@
-package gameLogic;
+package gamelogic;
 
 import board.GameBoard;
 import players.ComputerPlayer;
 import players.HumanPlayer;
 import players.Player;
-import gameUserInterface.TerminalDesign;
+import gameuserinterface.TerminalDesign;
 
 public class Game {
 
@@ -22,26 +22,26 @@ public class Game {
         this.gameBoard = new GameBoard();
         this.humanPlayer = new HumanPlayer('X');
         this.computerPlayer = new ComputerPlayer('O', difficulty); // Difficulty was given by user input in the main
-                                                                   // function "String[] args"
+        // function "String[] args"
 
     }
 
-    public void Play() { // Function that dictates the flow of the game
+    public void play() { // Function that dictates the flow of the game
 
         int turn = 0;
 
         while (turn < 9) {
 
             System.out.println("Turno numero:" + turn);
-            terminalDesign.showGame(gameBoard.BoardCellsToString());
+            terminalDesign.showGame(gameBoard.boardCellsToString());
 
             switch (turn % 2) { // alternates between player and computer turns
                 case 0:
 
-                    HumanPlayerMove('X');
+                    humanPlayerMove('X');
                     turn++;
                     if (gameBoard.CheckGameWin('X')) {
-                        terminalDesign.showGame(gameBoard.BoardCellsToString());
+                        terminalDesign.showGame(gameBoard.boardCellsToString());
                         System.out.println("Has ganado!");
                         turn = 10; // When a victory is detected, ends the loop
                     }
@@ -49,10 +49,10 @@ public class Game {
 
                 case 1:
 
-                    ComputerPlayerMove('O');
+                    computerPlayerMove('O');
                     turn++;
                     if (gameBoard.CheckGameWin('O')) {
-                        terminalDesign.showGame(gameBoard.BoardCellsToString());
+                        terminalDesign.showGame(gameBoard.boardCellsToString());
                         System.out.println("Has perdido!");
                         turn = 10; // When a victory is detected, ends the loop
                     }
@@ -64,13 +64,13 @@ public class Game {
         }
     }
 
-    private void HumanPlayerMove(char playerSymbol) {
-        
+    private void humanPlayerMove(char playerSymbol) {
+
         boolean validMove = false;
-        
+
         while (!validMove) {
 
-            int[] positions = humanPlayer.MakeMove(gameBoard);
+            int[] positions = humanPlayer.makeMove(gameBoard);
             validMove = gameBoard.placeMove(positions[0], positions[1], playerSymbol); // validates player's movement
 
             if (!validMove) {
@@ -79,9 +79,9 @@ public class Game {
         }
     }
 
-    private void ComputerPlayerMove(char playerSymbol) {
+    private void computerPlayerMove(char playerSymbol) {
 
-        int[] positions = computerPlayer.MakeMove(gameBoard);
+        int[] positions = computerPlayer.makeMove(gameBoard);
 
         if (!gameBoard.placeMove(positions[0], positions[1], playerSymbol)) {
             System.out.println("Error, movimiento de maquina invalido");

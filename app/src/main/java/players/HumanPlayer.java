@@ -3,6 +3,7 @@ package players;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
 import board.GameBoard;
 
 public class HumanPlayer implements Player {
@@ -26,12 +27,12 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public int[] MakeMove(GameBoard board) {
+    public int[] makeMove(GameBoard board) {
 
         int row = -1;
         int col = -1;
 
-        while(true){
+        while (true) {
 
             System.out.println("\nINGRESE SU MOVIMIENTO: ");
             String input = SCANNER.nextLine().toLowerCase();
@@ -42,7 +43,7 @@ public class HumanPlayer implements Player {
                 col = positions.getOrDefault(parts[1], -1); // Searches for the input's vertical coordinate equivalent inside the dictionary
 
                 if (row >= 0 && row < GameBoard.DIMENSION && col >= 0 && col < GameBoard.DIMENSION) {
-                    if (board.VerifyBoardSquareIsEmpty(row, col)) {
+                    if (board.verifyBoardSquareIsEmpty(row, col)) {
                         return new int[]{row, col}; // Valid move
                     } else {
                         System.out.println("La posicion ya esta ocupada. Intente otro movimiento");
