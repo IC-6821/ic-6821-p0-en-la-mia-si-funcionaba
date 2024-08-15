@@ -4,21 +4,26 @@ import board.GameBoard;
 import players.ComputerPlayer;
 import players.HumanPlayer;
 import players.Player;
-import gameuserinterface.TerminalDesign;
+import gameuserinterface.TerminalUI;
+import gameuserinterface.UI;
 
 public class Game {
 
     // The game is going to use 4 objects, so we declare them inside the main Game
     // class
 
-    private TerminalDesign terminalDesign;
+    private UI gameUI;
     private GameBoard gameBoard;
     private Player humanPlayer;
     private Player computerPlayer;
 
+    private final int HUMANPLAYER_MOVE_INVALID_EXCEPTION = 001;
+    private final int HUMANPLAYER_MOVE_OCCUPIED_EXCEPTION = 002;
+    private final int HUMANPLAYER_INPUT_INVALID_EXCEPTION = 003;
+
     public Game(String difficulty) { // Parametered constructor
 
-        this.terminalDesign = new TerminalDesign();
+        this.gameUI = new TerminalUI();
         this.gameBoard = new GameBoard();
         this.humanPlayer = new HumanPlayer('X');
         this.computerPlayer = new ComputerPlayer('O', difficulty); // Difficulty was given by user input in the main
@@ -32,8 +37,7 @@ public class Game {
 
         while (turn < 9) {
 
-            System.out.println("Turno numero:" + turn);
-            terminalDesign.showGame(gameBoard.boardCellsToString());
+            gameUI.showGame(gameBoard.boardCellsToString());
 
             switch (turn % 2) { // alternates between player and computer turns
                 case 0:
@@ -41,9 +45,9 @@ public class Game {
                     humanPlayerMove('X');
                     turn++;
                     if (gameBoard.CheckGameWin('X')) {
-                        terminalDesign.showGame(gameBoard.boardCellsToString());
-                        System.out.println("Has ganado!");
-                        turn = 10; // When a victory is detected, ends the loop
+                        gameUI.showGame(gameBoard.boardCellsToString());
+                        gameUI.displayWinMessage();
+                        turn = 10;
                     }
                     break;
 
@@ -52,15 +56,15 @@ public class Game {
                     computerPlayerMove('O');
                     turn++;
                     if (gameBoard.CheckGameWin('O')) {
-                        terminalDesign.showGame(gameBoard.boardCellsToString());
-                        System.out.println("Has perdido!");
-                        turn = 10; // When a victory is detected, ends the loop
+                        gameUI.showGame(gameBoard.boardCellsToString());
+                        gameUI.displayLoseMessage();
+                        turn = 10;
                     }
                     break;
             }
         }
-        if (turn == 9) { // If a victory is not registered, it's a tie
-            System.out.println("Ha sido un empate");
+        if (turn == 9) {
+            gameUI.displayTieMessage();
         }
     }
 
@@ -74,7 +78,7 @@ public class Game {
             validMove = gameBoard.placeMove(positions[0], positions[1], playerSymbol); // validates player's movement
 
             if (!validMove) {
-                System.out.println("Por favor ingrese un movimiento válido");
+                gameUI.humanPlayerErrorMessage(HUMANPLAYER_MOVE_INVALID_EXCEPTION);
             }
         }
     }
@@ -84,7 +88,7 @@ public class Game {
         int[] positions = computerPlayer.makeMove(gameBoard);
 
         if (!gameBoard.placeMove(positions[0], positions[1], playerSymbol)) {
-            System.out.println("Error, movimiento de maquina invalido");
+            gameUI.computerPlayerErrorMessage();
         }
     }
 }

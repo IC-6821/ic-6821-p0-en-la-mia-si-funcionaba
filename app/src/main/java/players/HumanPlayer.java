@@ -7,12 +7,10 @@ import java.util.Scanner;
 import board.GameBoard;
 
 public class HumanPlayer implements Player {
-    private final char SYMBOL;
     private final Scanner SCANNER;
     private Map<String, Integer> positions = new HashMap<>();
 
     public HumanPlayer(char symbol) {
-        this.SYMBOL = symbol;
 
         this.SCANNER = new Scanner(System.in);
 
@@ -34,7 +32,6 @@ public class HumanPlayer implements Player {
 
         while (true) {
 
-            System.out.println("\nINGRESE SU MOVIMIENTO: ");
             String input = SCANNER.nextLine().toLowerCase();
             String[] parts = input.split(" ");
 
@@ -46,7 +43,8 @@ public class HumanPlayer implements Player {
                     if (board.verifyBoardSquareIsEmpty(row, col)) {
                         return new int[]{row, col}; // Valid move
                     } else {
-                        System.out.println("La posicion ya esta ocupada. Intente otro movimiento");
+                        System.out.println("La posicion ya esta ocupada. Intente otro movimiento"); // ESTAS VERIFICACIONES DEBEN OCURRIR FUERA DE
+                                                                                                    // HUMAN PLAYER
                     }
                 } else {
                     System.out.println("Posicion invalida. Por favor ingrese una posicion valida");

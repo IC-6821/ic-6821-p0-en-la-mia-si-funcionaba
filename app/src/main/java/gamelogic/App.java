@@ -6,5 +6,3 @@ public class App {
         game.play();
     }
 }
-
-
