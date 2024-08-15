@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public class TerminalUI implements UI {
 
-    private final Scanner SCANNER;
+    private final Scanner scanner;
     private Map<String, Integer> positions = new HashMap<>();
 
     public TerminalUI() {
-        this.SCANNER = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
 
         // We add the positions with their respective value.
 
@@ -39,14 +39,14 @@ public class TerminalUI implements UI {
 
     @Override
     public String[] readHumanPlayerInput() {
-        String input = SCANNER.nextLine().toLowerCase();
-        String[] parts = input.split(" ");
+        final String input = scanner.nextLine().toLowerCase();
+        final String[] parts = input.split(" ");
         return parts;
     }
 
     @Override
-    public void humanPlayerErrorMessage(int EXCEPTION) {
-        switch (EXCEPTION){
+    public void humanPlayerErrorMessage(int execption) {
+        switch (execption) {
             case 001:
                 System.out.println("Por favor ingrese un movimiento válido");
                 break;

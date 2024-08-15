@@ -34,42 +34,39 @@ public class ComputerPlayer implements Player {
 
     public int[] easyDifficulty(GameBoard board) {
 
-        List<int[]> availableMoves = new ArrayList<>();
+        final List<int[]> availableMoves = new ArrayList<>();
 
-        // Searches for empty spaces in the board
-
-        for (int row = 0; row < GameBoard.DIMENSION; row++) {
-            for (int col = 0; col < GameBoard.DIMENSION; col++) {
+        for (int row = 0; row < GameBoard.MAX_ROW; row++) {
+            for (int col = 0; col < GameBoard.MAX_ROW; col++) {
                 if (board.verifyBoardSquareIsEmpty(row, col)) {
                     availableMoves.add(new int[]{row, col});
                 }
             }
         }
 
-        return availableMoves.get(rand.nextInt(availableMoves.size())); // Returns a random movement from the available ones
+        return availableMoves.get(rand.nextInt(availableMoves.size()));
     }
 
     public int[] mediumDifficulty(GameBoard board) {
 
         // Checks if it can win or block the opponent
 
-        for (int row = 0; row < GameBoard.DIMENSION; row++) {
-            for (int col = 0; col < GameBoard.DIMENSION; col++) {
+        for (int row = 0; row < GameBoard.MAX_ROW; row++) {
+            for (int col = 0; col < GameBoard.MAX_ROW; col++) {
 
                 if (board.verifyBoardSquareIsEmpty(row, col)) {
 
                     board.placeMove(row, col, symbol);
 
-                    if (board.CheckGameWin(symbol)) { // In case that specific movement wins, it returns that movement
+                    if (board.checkGameWin(symbol)) {
                         return new int[]{row, col};
                     } else {
-                        board.placeMove(row, col, ' '); // Else, it removes that movement
+                        board.placeMove(row, col, ' ');
                     }
                 }
             }
         }
 
-        // If it couldn't win, places a random movement using EasyDifficulty
 
         return easyDifficulty(board);
     }

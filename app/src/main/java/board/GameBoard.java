@@ -3,16 +3,17 @@ package board;
 public class GameBoard {
 
     private char[][] gameBoard;
-    public static final int DIMENSION = 3;
+    public static final int MAX_ROW = 3;
+    public static final int MAX_COLUMN = 3;
 
     public GameBoard() {
-        gameBoard = new char[DIMENSION][DIMENSION];
+        gameBoard = new char[MAX_ROW][MAX_COLUMN];
         placeSpacesInGameBoard();
     }
 
-    public void placeSpacesInGameBoard() {
-        for (int row = 0; row < DIMENSION; row++) {
-            for (int column = 0; column < DIMENSION; column++) {
+    private void placeSpacesInGameBoard() {
+        for (int row = 0; row < MAX_ROW; row++) {
+            for (int column = 0; column < MAX_COLUMN; column++) {
                 gameBoard[row][column] = ' ';
             }
         }
@@ -25,26 +26,28 @@ public class GameBoard {
         return false;
     }
 
-    public boolean checkRowWin(char playerPiece) {
-        for (int row = 0; row < DIMENSION; row++) {
-            if (gameBoard[row][0] == playerPiece && gameBoard[row][1] == playerPiece && gameBoard[row][2] == playerPiece) {
+    private boolean checkRowWin(char playerPiece) {
+        for (int row = 0; row < MAX_ROW; row++) {
+            if (gameBoard[row][0] == playerPiece && gameBoard[row][1] == playerPiece
+                    && gameBoard[row][2] == playerPiece) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkColumnWin(char playerPiece) {
-        for (int column = 0; column < DIMENSION; column++) {
-            if (gameBoard[0][column] == playerPiece && gameBoard[1][column] == playerPiece && gameBoard[2][column] == playerPiece) {
+    private boolean checkColumnWin(char playerPiece) {
+        for (int column = 0; column < MAX_COLUMN; column++) {
+            if (gameBoard[0][column] == playerPiece && gameBoard[1][column] == playerPiece
+                    && gameBoard[2][column] == playerPiece) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean checkMainDiagonalWin(char playerPiece) {
-        for (int rowAndColumn = 0; rowAndColumn < DIMENSION; rowAndColumn++) {
+    private boolean checkMainDiagonalWin(char playerPiece) {
+        for (int rowAndColumn = 0; rowAndColumn < MAX_ROW; rowAndColumn++) {
             if (gameBoard[rowAndColumn][rowAndColumn] != playerPiece) {
                 return false;
             }
@@ -52,32 +55,32 @@ public class GameBoard {
         return true;
     }
 
-    public boolean checkSecondDiagonalWin(char playerPiece) {
-        for (int row = 0; row < DIMENSION; row++) {
-            if (gameBoard[row][(DIMENSION - 1) - row] != playerPiece) {
+    private boolean checkSecondDiagonalWin(char playerPiece) {
+        for (int row = 0; row < MAX_ROW; row++) {
+            if (gameBoard[row][(MAX_COLUMN - 1) - row] != playerPiece) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean checkDiagonalWin(char playerPiece) {
+    private boolean checkDiagonalWin(char playerPiece) {
         if ((checkMainDiagonalWin(playerPiece)) || (checkSecondDiagonalWin(playerPiece))) {
             return true;
         }
         return false;
     }
 
-    public boolean CheckGameWin(char playerPiece) {
+    public boolean checkGameWin(char playerPiece) {
         if (checkDiagonalWin(playerPiece) || checkColumnWin(playerPiece) || checkRowWin(playerPiece)) {
             return true;
         }
         return false;
     }
 
-//    public boolean CheckTie() { NO SE USA, PERO LA DEJAMOS EN CASO DE QUE EL PROFESOR DECIDA QUE ES ACERTADO QUE EL TAMAÑO Y OTRAS SEAN AJUSTABLES
-//        for (int row = 0; row < DIMENSION; row++) {
-//            for (int column = 0; column< DIMENSION; column++) {
+//    public boolean CheckTie() {
+//        for (int row = 0; row < MAX_ROW; row++) {
+//            for (int column = 0; column< MAX_ROW; column++) {
 //                if (gameBoard[row][column] == ' '){
 //                    return false;
 //                }
@@ -88,8 +91,8 @@ public class GameBoard {
 
     public String boardCellsToString() {
         String boardChars = "";
-        for (int row = 0; row < DIMENSION; row++) {
-            for (int column = 0; column < DIMENSION; column++) {
+        for (int row = 0; row < MAX_ROW; row++) {
+            for (int column = 0; column < MAX_COLUMN; column++) {
                 boardChars = boardChars.concat(String.valueOf(gameBoard[row][column]));
             }
         }
@@ -103,5 +106,13 @@ public class GameBoard {
             return true;
         }
         return false;
+    }
+
+    public int getMaxRow() {
+        return MAX_ROW;
+    }
+
+    public int getMaxColumn() {
+        return MAX_ROW;
     }
 }

@@ -6,7 +6,7 @@ public interface UI {
     void displayLoseMessage();
     void displayTieMessage();
     String[] readHumanPlayerInput();
-    void humanPlayerErrorMessage(int EXCEPTION);
+    void humanPlayerErrorMessage(int execption);
     void computerPlayerErrorMessage();
     void gameConfigErrorMessage();
 }

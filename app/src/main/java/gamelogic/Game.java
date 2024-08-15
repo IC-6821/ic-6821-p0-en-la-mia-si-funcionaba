@@ -17,11 +17,11 @@ public class Game {
     private Player humanPlayer;
     private Player computerPlayer;
 
-    private final int HUMANPLAYER_MOVE_INVALID_EXCEPTION = 001;
-    private final int HUMANPLAYER_MOVE_OCCUPIED_EXCEPTION = 002;
-    private final int HUMANPLAYER_INPUT_INVALID_EXCEPTION = 003;
+    private final int humanPlayerInvalidMoveExpection = 001;
+    private final int humanPlayerMoveOccupiedException = 002;
+    private final int humanPlayerInputInvalidException = 003;
 
-    public Game(String difficulty) { // Parametered constructor
+    public Game(String difficulty) {
 
         this.gameUI = new TerminalUI();
         this.gameBoard = new GameBoard();
@@ -31,7 +31,7 @@ public class Game {
 
     }
 
-    public void play() { // Function that dictates the flow of the game
+    public void play() {
 
         int turn = 0;
 
@@ -44,7 +44,7 @@ public class Game {
 
                     humanPlayerMove('X');
                     turn++;
-                    if (gameBoard.CheckGameWin('X')) {
+                    if (gameBoard.checkGameWin('X')) {
                         gameUI.showGame(gameBoard.boardCellsToString());
                         gameUI.displayWinMessage();
                         turn = 10;
@@ -55,7 +55,7 @@ public class Game {
 
                     computerPlayerMove('O');
                     turn++;
-                    if (gameBoard.CheckGameWin('O')) {
+                    if (gameBoard.checkGameWin('O')) {
                         gameUI.showGame(gameBoard.boardCellsToString());
                         gameUI.displayLoseMessage();
                         turn = 10;
@@ -74,18 +74,18 @@ public class Game {
 
         while (!validMove) {
 
-            int[] positions = humanPlayer.makeMove(gameBoard);
+            final int[] positions = humanPlayer.makeMove(gameBoard);
             validMove = gameBoard.placeMove(positions[0], positions[1], playerSymbol); // validates player's movement
 
             if (!validMove) {
-                gameUI.humanPlayerErrorMessage(HUMANPLAYER_MOVE_INVALID_EXCEPTION);
+                gameUI.humanPlayerErrorMessage(humanPlayerInvalidMoveExpection);
             }
         }
     }
 
     private void computerPlayerMove(char playerSymbol) {
 
-        int[] positions = computerPlayer.makeMove(gameBoard);
+        final int[] positions = computerPlayer.makeMove(gameBoard);
 
         if (!gameBoard.placeMove(positions[0], positions[1], playerSymbol)) {
             gameUI.computerPlayerErrorMessage();
