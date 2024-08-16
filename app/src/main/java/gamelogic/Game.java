@@ -25,13 +25,11 @@ public class Game {
     private final int avoidTie = 10;
 
     public Game(final String difficulty) {
-
         this.gameUI = new TerminalUI();
         this.gameBoard = new GameBoard();
-        this.humanPlayer = new HumanPlayer('X');
+        this.humanPlayer = new HumanPlayer('X', (TerminalUI) gameUI);
         this.computerPlayer = new ComputerPlayer('O', difficulty); // Difficulty was given by user input in the main
         // function "String[] args"
-
     }
 
     /**

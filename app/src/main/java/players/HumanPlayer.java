@@ -5,11 +5,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 import board.GameBoard;
+import gameuserinterface.TerminalUI;
 
 public class HumanPlayer implements Player {
     private final Scanner scanner;
+    private final TerminalUI ui;
     private Map<String, Integer> positions = new HashMap<>();
     private boolean validMove;
+
     private static final String POS_ROW_TOP = "arriba";
     private static final String POS_ROW_MIDDLE = "medio";
     private static final String POS_ROW_BOTTOM = "abajo";
@@ -17,7 +20,11 @@ public class HumanPlayer implements Player {
     private static final String POS_COL_CENTER = "centro";
     private static final String POS_COL_RIGHT = "derecha";
 
-    public HumanPlayer(final char symbol) {
+    private static final int ERROR_POSITION_OCCUPIED = 002;
+    private static final int ERROR_INVALID_POSITION = 003;
+
+    public HumanPlayer(final char symbol, TerminalUI ui) {
+        this.ui = ui;
 
         this.scanner = new Scanner(System.in);
 
@@ -54,14 +61,13 @@ public class HumanPlayer implements Player {
                     if (board.verifyBoardSquareIsEmpty(row, col)) {
                         validMove = true;
                     } else {
-                        System.out.println("La posicion ya esta ocupada. Intente otro movimiento");
-                        // HUMAN PLAYER
+                        ui.humanPlayerErrorMessage(ERROR_POSITION_OCCUPIED);
                     }
                 } else {
-                    System.out.println("Posicion invalida. Por favor ingrese una posicion valida");
+                    ui.humanPlayerErrorMessage(ERROR_INVALID_POSITION);
                 }
             } else {
-                System.out.println("Entrada invalida. Por favor use el formato 'fila columna' (ej: arriba izquierda)");
+                ui.humanPlayerErrorMessage(ERROR_INVALID_POSITION);
             }
         }
         return new int[]{row, col};

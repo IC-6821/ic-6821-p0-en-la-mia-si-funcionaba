@@ -19,21 +19,29 @@ public class TerminalUI implements UI {
     private final int octaveCell = 7;
     private final int ninthCell = 8;
 
-    private final int error001 = 001;
-    private final int error002 = 002;
-    private final int error003 = 003;
+    private static final String POS_ROW_TOP = "arriba";
+    private static final String POS_ROW_MIDDLE = "medio";
+    private static final String POS_ROW_BOTTOM = "abajo";
+    private static final String POS_COL_LEFT = "izquierda";
+    private static final String POS_COL_CENTER = "centro";
+    private static final String POS_COL_RIGHT = "derecha";
+
+    private static final int ERROR_POSITION_OCCUPIED = 002;
+    private static final int ERROR_INVALID_POSITION = 003;
 
     public TerminalUI() {
         this.scanner = new Scanner(System.in);
 
         // We add the positions with their respective value.
 
-        this.positions.put("arriba", 0);
-        this.positions.put("medio", 1);
-        this.positions.put("abajo", 2);
-        this.positions.put("izquierda", 0);
-        this.positions.put("centro", 1);
-        this.positions.put("derecha", 2);
+        this.positions = Map.of(
+                POS_ROW_TOP, 0,
+                POS_ROW_MIDDLE, 1,
+                POS_ROW_BOTTOM, 2,
+                POS_COL_LEFT, 0,
+                POS_COL_CENTER, 1,
+                POS_COL_RIGHT, 2
+        );
     }
 
     /**
@@ -76,19 +84,15 @@ public class TerminalUI implements UI {
     @Override
     public void humanPlayerErrorMessage(int execption) {
         switch (execption) {
-            case error001:
+            case ERROR_INVALID_POSITION:
                 System.out.println("Por favor ingrese un movimiento válido");
                 break;
-            case error002:
+            case ERROR_POSITION_OCCUPIED:
                 System.out.println("La posicion ya esta ocupada. Intente otro movimiento");
-                break;
-            case error003:
-                System.out.println("Entrada invalida. Por favor use el formato 'fila columna' (ej: arriba izquierda)");
                 break;
             default:
                 System.out.println("UNKNOWN ERROR, CHECK FOR DETAILS IN CONSOLE");
         }
-
     }
 
     /**
@@ -128,5 +132,4 @@ public class TerminalUI implements UI {
         System.out.print(boardStatusAux[ninthCell]);
         System.out.print("\n");
     }
-
 }
