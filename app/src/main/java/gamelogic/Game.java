@@ -21,7 +21,10 @@ public class Game {
     private final int humanPlayerMoveOccupiedException = 002;
     private final int humanPlayerInputInvalidException = 003;
 
-    public Game(String difficulty) {
+    private final int maxTurns = 9;
+    private final int avoidTie = 10;
+
+    public Game(final String difficulty) {
 
         this.gameUI = new TerminalUI();
         this.gameBoard = new GameBoard();
@@ -31,11 +34,13 @@ public class Game {
 
     }
 
+    /**
+     * This method is responsible to keep the game running and control al the logic.
+     */
     public void play() {
 
         int turn = 0;
-
-        while (turn < 9) {
+        while (turn < maxTurns) {
 
             gameUI.showGame(gameBoard.boardCellsToString());
 
@@ -47,23 +52,23 @@ public class Game {
                     if (gameBoard.checkGameWin('X')) {
                         gameUI.showGame(gameBoard.boardCellsToString());
                         gameUI.displayWinMessage();
-                        turn = 10;
+                        turn = avoidTie;
                     }
                     break;
 
-                case 1:
+                default:
 
                     computerPlayerMove('O');
                     turn++;
                     if (gameBoard.checkGameWin('O')) {
                         gameUI.showGame(gameBoard.boardCellsToString());
                         gameUI.displayLoseMessage();
-                        turn = 10;
+                        turn = avoidTie;
                     }
                     break;
             }
         }
-        if (turn == 9) {
+        if (turn == maxTurns) {
             gameUI.displayTieMessage();
         }
     }

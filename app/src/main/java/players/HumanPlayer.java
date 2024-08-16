@@ -11,7 +11,7 @@ public class HumanPlayer implements Player {
     private Map<String, Integer> positions = new HashMap<>();
     private boolean validMove;
 
-    public HumanPlayer(char symbol) {
+    public HumanPlayer(final char symbol) {
 
         this.scanner = new Scanner(System.in);
 
@@ -25,6 +25,9 @@ public class HumanPlayer implements Player {
         this.positions.put("derecha", 2);
     }
 
+    /**
+     * This method allows the movements in the board, by a user in this case.
+     **/
     @Override
     public int[] makeMove(GameBoard board) {
         int row = -1;

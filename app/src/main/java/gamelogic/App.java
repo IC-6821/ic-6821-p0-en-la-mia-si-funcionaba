@@ -1,8 +1,10 @@
 package gamelogic;
 
-public class App {
+public final class App {
+    private App() {
+    }
     public static void main(String[] args) {
-        Game game = new Game(args[1]);
+        final Game game = new Game(args[1]);
         game.play();
     }
 }

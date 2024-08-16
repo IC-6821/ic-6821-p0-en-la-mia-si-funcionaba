@@ -18,7 +18,11 @@ public class GameBoard {
             }
         }
     }
-
+    /**
+     * This method checks for a position in the board, using integer values for
+     * row and column it returns true if the position determined by these values
+     * is empty and false in other case
+     */
     public boolean verifyBoardSquareIsEmpty(int row, int column) {
         if (gameBoard[row][column] == ' ') {
             return true;
@@ -71,6 +75,9 @@ public class GameBoard {
         return false;
     }
 
+    /**
+     * This method is used to check if a player got a row to win.
+     */
     public boolean checkGameWin(char playerPiece) {
         if (checkDiagonalWin(playerPiece) || checkColumnWin(playerPiece) || checkRowWin(playerPiece)) {
             return true;
@@ -89,6 +96,9 @@ public class GameBoard {
 //        return true;
 //    }
 
+    /**
+     * This method converts the board cells into a string that can be read.
+     */
     public String boardCellsToString() {
         String boardChars = "";
         for (int row = 0; row < MAX_ROW; row++) {
@@ -99,6 +109,10 @@ public class GameBoard {
         return boardChars;
     }
 
+    /**
+     * This method is used to place a symbol inside the GameBoard,
+     * depending on its position.
+     */
     public boolean placeMove(int row, int col, char symbol) {
         if (verifyBoardSquareIsEmpty(row, col)) {
 
@@ -108,11 +122,17 @@ public class GameBoard {
         return false;
     }
 
+    /**
+     * This method returns the value of MAX_ROW
+     */
     public int getMaxRow() {
         return MAX_ROW;
     }
 
+    /**
+     * This method returns the value of MAX_COLUMN
+     */
     public int getMaxColumn() {
-        return MAX_ROW;
+        return MAX_COLUMN;
     }
 }
