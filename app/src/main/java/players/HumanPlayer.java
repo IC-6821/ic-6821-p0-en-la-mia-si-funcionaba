@@ -10,6 +10,12 @@ public class HumanPlayer implements Player {
     private final Scanner scanner;
     private Map<String, Integer> positions = new HashMap<>();
     private boolean validMove;
+    private static final String POS_ROW_TOP = "arriba";
+    private static final String POS_ROW_MIDDLE = "medio";
+    private static final String POS_ROW_BOTTOM = "abajo";
+    private static final String POS_COL_LEFT = "izquierda";
+    private static final String POS_COL_CENTER = "centro";
+    private static final String POS_COL_RIGHT = "derecha";
 
     public HumanPlayer(final char symbol) {
 
@@ -17,12 +23,12 @@ public class HumanPlayer implements Player {
 
         // We add the positions with their respective value.
 
-        this.positions.put("arriba", 0);
-        this.positions.put("medio", 1);
-        this.positions.put("abajo", 2);
-        this.positions.put("izquierda", 0);
-        this.positions.put("centro", 1);
-        this.positions.put("derecha", 2);
+        this.positions.put(POS_ROW_TOP, 0);
+        this.positions.put(POS_ROW_MIDDLE, 1);
+        this.positions.put(POS_ROW_BOTTOM, 2);
+        this.positions.put(POS_COL_LEFT, 0);
+        this.positions.put(POS_COL_CENTER, 1);
+        this.positions.put(POS_COL_RIGHT, 2);
     }
 
     /**
