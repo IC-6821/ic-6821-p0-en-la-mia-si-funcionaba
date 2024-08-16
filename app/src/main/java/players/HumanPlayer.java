@@ -23,12 +23,14 @@ public class HumanPlayer implements Player {
 
         // We add the positions with their respective value.
 
-        this.positions.put(POS_ROW_TOP, 0);
-        this.positions.put(POS_ROW_MIDDLE, 1);
-        this.positions.put(POS_ROW_BOTTOM, 2);
-        this.positions.put(POS_COL_LEFT, 0);
-        this.positions.put(POS_COL_CENTER, 1);
-        this.positions.put(POS_COL_RIGHT, 2);
+        this.positions = Map.of(
+                POS_ROW_TOP, 0,
+                POS_ROW_MIDDLE, 1,
+                POS_ROW_BOTTOM, 2,
+                POS_COL_LEFT, 0,
+                POS_COL_CENTER, 1,
+                POS_COL_RIGHT, 2
+        );
     }
 
     /**
