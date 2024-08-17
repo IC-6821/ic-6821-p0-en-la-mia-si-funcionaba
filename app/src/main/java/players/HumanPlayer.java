@@ -8,9 +8,21 @@ import board.GameBoard;
 import gameuserinterface.TerminalUI;
 
 public class HumanPlayer implements Player {
+    private enum BoardRow {
+        TOP,
+        MIDDLE,
+        BOTTOM
+    }
+    private enum BoardCol {
+        LEFT,
+        CENTER,
+        RIGHT
+    }
+
     private final Scanner scanner;
     private final TerminalUI ui;
-    private Map<String, Integer> positions = new HashMap<>();
+    private Map<String, Integer> rowPositions = new HashMap<>();
+    private Map<String, Integer> colPositions = new HashMap<>();
     private boolean validMove;
 
     private static final String POS_ROW_TOP = "arriba";
@@ -30,13 +42,15 @@ public class HumanPlayer implements Player {
 
         // We add the positions with their respective value.
 
-        this.positions = Map.of(
-                POS_ROW_TOP, 0,
-                POS_ROW_MIDDLE, 1,
-                POS_ROW_BOTTOM, 2,
-                POS_COL_LEFT, 0,
-                POS_COL_CENTER, 1,
-                POS_COL_RIGHT, 2
+        this.rowPositions = Map.of(
+                POS_ROW_TOP, BoardRow.TOP.ordinal(),
+                POS_ROW_MIDDLE, BoardRow.MIDDLE.ordinal(),
+                POS_ROW_BOTTOM, BoardRow.BOTTOM.ordinal()
+        );
+        this.colPositions = Map.of(
+                POS_COL_LEFT, BoardCol.LEFT.ordinal(),
+                POS_COL_CENTER, BoardCol.CENTER.ordinal(),
+                POS_COL_RIGHT, BoardCol.RIGHT.ordinal()
         );
     }
 
@@ -54,10 +68,10 @@ public class HumanPlayer implements Player {
             final String[] parts = input.split(" ");
 
             if (parts.length == 2) {
-                row = positions.getOrDefault(parts[0], -1);
-                col = positions.getOrDefault(parts[1], -1);
+                row = rowPositions.getOrDefault(parts[0], -1);
+                col = colPositions.getOrDefault(parts[1], -1);
 
-                if (row >= 0 && row < GameBoard.MAX_ROW && col >= 0 && col < GameBoard.MAX_ROW) {
+                if (row != -1 && col != -1) {
                     if (board.verifyBoardSquareIsEmpty(row, col)) {
                         validMove = true;
                     } else {
