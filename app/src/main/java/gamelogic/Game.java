@@ -39,8 +39,8 @@ public class Game {
 
         int turn = 0;
         while (turn < maxTurns) {
-
-            gameUI.showGame(gameBoard.boardCellsToString());
+            showGame();
+            // gameUI.showGame(gameBoard.boardCellsToString());
 
             switch (turn % 2) { // alternates between player and computer turns
                 case 0:
@@ -48,7 +48,8 @@ public class Game {
                     humanPlayerMove('X');
                     turn++;
                     if (gameBoard.checkGameWin('X')) {
-                        gameUI.showGame(gameBoard.boardCellsToString());
+                        // gameUI.showGame(gameBoard.boardCellsToString());
+                        showGame();
                         gameUI.displayWinMessage();
                         turn = avoidTie;
                     }
@@ -59,7 +60,8 @@ public class Game {
                     computerPlayerMove('O');
                     turn++;
                     if (gameBoard.checkGameWin('O')) {
-                        gameUI.showGame(gameBoard.boardCellsToString());
+                        // gameUI.showGame(gameBoard.boardCellsToString());
+                        showGame();
                         gameUI.displayLoseMessage();
                         turn = avoidTie;
                     }
@@ -74,12 +76,10 @@ public class Game {
     private void humanPlayerMove(char playerSymbol) {
 
         boolean validMove = false;
-
         while (!validMove) {
 
             final int[] positions = humanPlayer.makeMove(gameBoard);
             validMove = gameBoard.placeMove(positions[0], positions[1], playerSymbol); // validates player's movement
-
             if (!validMove) {
                 gameUI.humanPlayerErrorMessage(humanPlayerInvalidMoveExpection);
             }
@@ -89,9 +89,19 @@ public class Game {
     private void computerPlayerMove(char playerSymbol) {
 
         final int[] positions = computerPlayer.makeMove(gameBoard);
-
         if (!gameBoard.placeMove(positions[0], positions[1], playerSymbol)) {
             gameUI.computerPlayerErrorMessage();
         }
+    }
+
+    private void showGame() {
+        String boardChars = "";
+        for (int row = 0; row < 3; row++) {
+            for (int column = 0; column < 3; column++) {
+                boardChars = boardChars.concat(String.valueOf(gameBoard.cellValue(row, column)));
+            }
+        }
+
+        gameUI.showGame(boardChars);
     }
 }

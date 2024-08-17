@@ -18,6 +18,7 @@ public class GameBoard {
             }
         }
     }
+
     /**
      * This method checks for a position in the board, using integer values for
      * row and column it returns true if the position determined by these values
@@ -85,16 +86,16 @@ public class GameBoard {
         return false;
     }
 
-//    public boolean CheckTie() {
-//        for (int row = 0; row < MAX_ROW; row++) {
-//            for (int column = 0; column< MAX_ROW; column++) {
-//                if (gameBoard[row][column] == ' '){
-//                    return false;
-//                }
-//            }
-//        }
-//        return true;
-//    }
+    // public boolean CheckTie() {
+    // for (int row = 0; row < MAX_ROW; row++) {
+    // for (int column = 0; column< MAX_ROW; column++) {
+    // if (gameBoard[row][column] == ' '){
+    // return false;
+    // }
+    // }
+    // }
+    // return true;
+    // }
 
     /**
      * This method converts the board cells into a string that can be read.
@@ -107,6 +108,10 @@ public class GameBoard {
             }
         }
         return boardChars;
+    }
+
+    public char cellValue(int row, int column) {
+        return gameBoard[row][column];
     }
 
     /**
