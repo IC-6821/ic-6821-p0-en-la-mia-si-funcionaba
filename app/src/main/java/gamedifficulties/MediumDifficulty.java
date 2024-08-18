@@ -1,8 +1,10 @@
-package players;
+package gamedifficulties;
 
 import board.GameBoard;
+import gamedifficulties.Difficulty;
 
-public class HardDifficulty implements Difficulty {
+public class MediumDifficulty implements Difficulty {
+
     @Override
     public int[] makeMove(GameBoard board) {
         return new int[0];

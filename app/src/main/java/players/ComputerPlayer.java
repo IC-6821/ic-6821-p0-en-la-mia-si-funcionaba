@@ -1,6 +1,10 @@
 package players;
 
 import board.GameBoard;
+import gamedifficulties.Difficulty;
+import gamedifficulties.EasyDifficulty;
+import gamedifficulties.HardDifficulty;
+import gamedifficulties.MediumDifficulty;
 
 public class ComputerPlayer implements Player {
 
@@ -27,7 +31,6 @@ public class ComputerPlayer implements Player {
 
     @Override
     public int[] makeMove(GameBoard board) {
-
         return new int[0];
     }
 }
