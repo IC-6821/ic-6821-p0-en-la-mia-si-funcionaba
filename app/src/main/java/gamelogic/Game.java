@@ -30,7 +30,7 @@ public class Game {
         this.gameUI = new TerminalUI();
         this.gameBoard = new GameBoard(MAX_ROW, MAX_COLUMN);
         this.humanPlayer = new HumanPlayer('X');
-        this.computerPlayer = new ComputerPlayer('O', difficulty);
+        this.computerPlayer = new ComputerPlayer('O', difficulty, MAX_ROW, MAX_COLUMN);
         // function "String[] args"
     }
 
