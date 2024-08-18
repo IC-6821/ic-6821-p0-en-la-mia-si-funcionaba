@@ -20,7 +20,7 @@ public class HumanPlayer implements Player {
     }
 
     private final Scanner scanner;
-    private final TerminalUI ui;
+    private final TerminalUI gameUI;
     private Map<String, Integer> rowPositions = new HashMap<>();
     private Map<String, Integer> colPositions = new HashMap<>();
     private boolean validMove;
@@ -35,18 +35,16 @@ public class HumanPlayer implements Player {
     private static final int ERROR_POSITION_OCCUPIED = 002;
     private static final int ERROR_INVALID_POSITION = 003;
 
-    public HumanPlayer(final char symbol, TerminalUI ui) {
-        this.ui = ui;
-
+    public HumanPlayer(final char symbol) {
+        this.gameUI = new TerminalUI();
         this.scanner = new Scanner(System.in);
-
-        // We add the positions with their respective value.
 
         this.rowPositions = Map.of(
                 POS_ROW_TOP, BoardRow.TOP.ordinal(),
                 POS_ROW_MIDDLE, BoardRow.MIDDLE.ordinal(),
                 POS_ROW_BOTTOM, BoardRow.BOTTOM.ordinal()
         );
+
         this.colPositions = Map.of(
                 POS_COL_LEFT, BoardCol.LEFT.ordinal(),
                 POS_COL_CENTER, BoardCol.CENTER.ordinal(),
@@ -75,13 +73,13 @@ public class HumanPlayer implements Player {
                     if (board.verifyBoardSquareIsEmpty(row, col)) {
                         validMove = true;
                     } else {
-                        ui.humanPlayerErrorMessage(ERROR_POSITION_OCCUPIED);
+                        gameUI.humanPlayerErrorMessage(ERROR_POSITION_OCCUPIED);
                     }
                 } else {
-                    ui.humanPlayerErrorMessage(ERROR_INVALID_POSITION);
+                    gameUI.humanPlayerErrorMessage(ERROR_INVALID_POSITION);
                 }
             } else {
-                ui.humanPlayerErrorMessage(ERROR_INVALID_POSITION);
+                gameUI.humanPlayerErrorMessage(ERROR_INVALID_POSITION);
             }
         }
         return new int[]{row, col};

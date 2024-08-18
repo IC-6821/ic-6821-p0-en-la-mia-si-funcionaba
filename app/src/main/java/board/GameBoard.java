@@ -3,17 +3,19 @@ package board;
 public class GameBoard {
 
     private char[][] gameBoard;
-    public static final int MAX_ROW = 3;
-    public static final int MAX_COLUMN = 3;
+    private final int maxRow;
+    private final int maxColumn;
 
-    public GameBoard() {
-        gameBoard = new char[MAX_ROW][MAX_COLUMN];
+    public GameBoard(final int maxRow, final int maxColumn) {
+        this.maxRow = maxRow;
+        this.maxColumn = maxColumn;
+        gameBoard = new char[maxRow][maxColumn];
         placeSpacesInGameBoard();
     }
 
     private void placeSpacesInGameBoard() {
-        for (int row = 0; row < MAX_ROW; row++) {
-            for (int column = 0; column < MAX_COLUMN; column++) {
+        for (int row = 0; row < maxRow; row++) {
+            for (int column = 0; column < maxColumn; column++) {
                 gameBoard[row][column] = ' ';
             }
         }
@@ -25,14 +27,11 @@ public class GameBoard {
      * is empty and false in other case
      */
     public boolean verifyBoardSquareIsEmpty(int row, int column) {
-        if (gameBoard[row][column] == ' ') {
-            return true;
-        }
-        return false;
+        return gameBoard[row][column] == ' ';
     }
 
     private boolean checkRowWin(char playerPiece) {
-        for (int row = 0; row < MAX_ROW; row++) {
+        for (int row = 0; row < maxRow; row++) {
             if (gameBoard[row][0] == playerPiece && gameBoard[row][1] == playerPiece
                     && gameBoard[row][2] == playerPiece) {
                 return true;
@@ -42,7 +41,7 @@ public class GameBoard {
     }
 
     private boolean checkColumnWin(char playerPiece) {
-        for (int column = 0; column < MAX_COLUMN; column++) {
+        for (int column = 0; column < maxColumn; column++) {
             if (gameBoard[0][column] == playerPiece && gameBoard[1][column] == playerPiece
                     && gameBoard[2][column] == playerPiece) {
                 return true;
@@ -52,7 +51,7 @@ public class GameBoard {
     }
 
     private boolean checkMainDiagonalWin(char playerPiece) {
-        for (int rowAndColumn = 0; rowAndColumn < MAX_ROW; rowAndColumn++) {
+        for (int rowAndColumn = 0; rowAndColumn < maxRow; rowAndColumn++) {
             if (gameBoard[rowAndColumn][rowAndColumn] != playerPiece) {
                 return false;
             }
@@ -61,8 +60,8 @@ public class GameBoard {
     }
 
     private boolean checkSecondDiagonalWin(char playerPiece) {
-        for (int row = 0; row < MAX_ROW; row++) {
-            if (gameBoard[row][(MAX_COLUMN - 1) - row] != playerPiece) {
+        for (int row = 0; row < maxRow; row++) {
+            if (gameBoard[row][(maxColumn - 1) - row] != playerPiece) {
                 return false;
             }
         }
@@ -70,46 +69,45 @@ public class GameBoard {
     }
 
     private boolean checkDiagonalWin(char playerPiece) {
-        if ((checkMainDiagonalWin(playerPiece)) || (checkSecondDiagonalWin(playerPiece))) {
-            return true;
-        }
-        return false;
+        return (checkMainDiagonalWin(playerPiece)) || (checkSecondDiagonalWin(playerPiece));
     }
 
     /**
      * This method is used to check if a player got a row to win.
      */
     public boolean checkGameWin(char playerPiece) {
-        if (checkDiagonalWin(playerPiece) || checkColumnWin(playerPiece) || checkRowWin(playerPiece)) {
-            return true;
-        }
-        return false;
+        return checkDiagonalWin(playerPiece) || checkColumnWin(playerPiece) || checkRowWin(playerPiece);
     }
 
-    // public boolean CheckTie() {
-    // for (int row = 0; row < MAX_ROW; row++) {
-    // for (int column = 0; column< MAX_ROW; column++) {
-    // if (gameBoard[row][column] == ' '){
-    // return false;
-    // }
-    // }
-    // }
-    // return true;
-    // }
+    /**
+     * This method is used to check if the game results in a tie
+     */
+    public boolean checkTie() {
+         for (int row = 0; row < maxRow; row++) {
+             for (int column = 0; column < maxRow; column++) {
+                 if (gameBoard[row][column] == ' ') {
+                    return false;
+                 }
+             }
+         }
+         return true;
+    }
 
     /**
      * This method converts the board cells into a string that can be read.
      */
     public String boardCellsToString() {
         String boardChars = "";
-        for (int row = 0; row < MAX_ROW; row++) {
-            for (int column = 0; column < MAX_COLUMN; column++) {
+        for (int row = 0; row < maxRow; row++) {
+            for (int column = 0; column < maxColumn; column++) {
                 boardChars = boardChars.concat(String.valueOf(gameBoard[row][column]));
             }
         }
         return boardChars;
     }
-
+    /**
+     * This method returns the char value of a specific cell
+     */
     public char cellValue(int row, int column) {
         return gameBoard[row][column];
     }
@@ -120,24 +118,13 @@ public class GameBoard {
      */
     public boolean placeMove(int row, int col, char symbol) {
         if (verifyBoardSquareIsEmpty(row, col)) {
-
             gameBoard[row][col] = symbol;
             return true;
+
         }
+
         return false;
-    }
 
-    /**
-     * This method returns the value of MAX_ROW
-     */
-    public int getMaxRow() {
-        return MAX_ROW;
     }
-
-    /**
-     * This method returns the value of MAX_COLUMN
-     */
-    public int getMaxColumn() {
-        return MAX_COLUMN;
-    }
+    
 }

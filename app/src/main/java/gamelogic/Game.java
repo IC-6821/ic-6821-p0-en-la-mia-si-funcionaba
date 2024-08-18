@@ -8,12 +8,11 @@ import gameuserinterface.TerminalUI;
 import gameuserinterface.UI;
 
 public class Game {
+    private static final int MAX_ROW = 3;
+    private static final int MAX_COLUMN = 3;
 
-    // The game is going to use 4 objects, so we declare them inside the main Game
-    // class
-
-    private UI gameUI;
-    private GameBoard gameBoard;
+    private final UI gameUI;
+    private final GameBoard gameBoard;
     private Player humanPlayer;
     private Player computerPlayer;
 
@@ -21,14 +20,17 @@ public class Game {
     private final int humanPlayerMoveOccupiedException = 002;
     private final int humanPlayerInputInvalidException = 003;
 
-    private final int maxTurns = 9;
-    private final int avoidTie = 10;
+    private final int humanPlayerWinResult = 100;
+    private final int computerPlayerWinResult = 101;
+    private final int tieGameResult = 102;
+
+    private boolean humanPlayerTurn = true;
 
     public Game(final String difficulty) {
         this.gameUI = new TerminalUI();
-        this.gameBoard = new GameBoard();
-        this.humanPlayer = new HumanPlayer('X', (TerminalUI) gameUI);
-        this.computerPlayer = new ComputerPlayer('O', difficulty); // Difficulty was given by user input in the main
+        this.gameBoard = new GameBoard(MAX_ROW, MAX_COLUMN);
+        this.humanPlayer = new HumanPlayer('X');
+        this.computerPlayer = new ComputerPlayer('O', difficulty);
         // function "String[] args"
     }
 
@@ -37,40 +39,42 @@ public class Game {
      */
     public void play() {
 
-        int turn = 0;
-        while (turn < maxTurns) {
+        int gameResult = 0;
+        boolean activeGame = true;
+        while (activeGame) {
             showGame();
-            // gameUI.showGame(gameBoard.boardCellsToString());
 
-            switch (turn % 2) { // alternates between player and computer turns
-                case 0:
+            if (humanPlayerTurn) {
+                humanPlayerMove('X');
 
-                    humanPlayerMove('X');
-                    turn++;
-                    if (gameBoard.checkGameWin('X')) {
-                        // gameUI.showGame(gameBoard.boardCellsToString());
-                        showGame();
-                        gameUI.displayWinMessage();
-                        turn = avoidTie;
-                    }
-                    break;
+            } else {
+                computerPlayerMove('O');
 
-                default:
-
-                    computerPlayerMove('O');
-                    turn++;
-                    if (gameBoard.checkGameWin('O')) {
-                        // gameUI.showGame(gameBoard.boardCellsToString());
-                        showGame();
-                        gameUI.displayLoseMessage();
-                        turn = avoidTie;
-                    }
-                    break;
             }
+
+            gameResult = checkGameStatus();
+            if (gameResult != 0) {
+                activeGame = false;
+            }
+
+            humanPlayerTurn = !humanPlayerTurn;
+
         }
-        if (turn == maxTurns) {
-            gameUI.displayTieMessage();
+
+        switch (gameResult) {
+            case humanPlayerWinResult:
+                gameUI.displayWinMessage();
+                break;
+            case computerPlayerWinResult:
+                gameUI.displayLoseMessage();
+                break;
+            case tieGameResult:
+                gameUI.displayTieMessage();
+                break;
+            default:
+                gameUI.gameConfigErrorMessage();
         }
+
     }
 
     private void humanPlayerMove(char playerSymbol) {
@@ -96,12 +100,28 @@ public class Game {
 
     private void showGame() {
         String boardChars = "";
-        for (int row = 0; row < 3; row++) {
-            for (int column = 0; column < 3; column++) {
+        for (int row = 0; row < MAX_ROW; row++) {
+            for (int column = 0; column < MAX_COLUMN; column++) {
                 boardChars = boardChars.concat(String.valueOf(gameBoard.cellValue(row, column)));
             }
         }
 
         gameUI.showGame(boardChars);
+    }
+
+    private int checkGameStatus() {
+        if (gameBoard.checkGameWin('X')) {
+            return humanPlayerWinResult;
+
+        } else if (gameBoard.checkGameWin('O')) {
+            return computerPlayerWinResult;
+
+        } else if (gameBoard.checkTie()) {
+            return tieGameResult;
+
+        } else {
+            return 0;
+
+        }
     }
 }

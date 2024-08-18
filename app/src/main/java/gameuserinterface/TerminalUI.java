@@ -16,8 +16,9 @@ public class TerminalUI implements UI {
     private final int fifthCell = 4;
     private final int sixthCell = 5;
     private final int seventhCell = 6;
-    private final int octaveCell = 7;
+    private final int eigthCell = 7;
     private final int ninthCell = 8;
+
 
     private static final String POS_ROW_TOP = "arriba";
     private static final String POS_ROW_MIDDLE = "medio";
@@ -82,8 +83,8 @@ public class TerminalUI implements UI {
      * This method prints the exception in a message through console.
      */
     @Override
-    public void humanPlayerErrorMessage(int execption) {
-        switch (execption) {
+    public void humanPlayerErrorMessage(int exception) {
+        switch (exception) {
             case ERROR_INVALID_POSITION:
                 System.out.println("Por favor ingrese un movimiento válido");
                 break;
@@ -128,7 +129,7 @@ public class TerminalUI implements UI {
         System.out.print(boardStatusAux[sixthCell]);
         System.out.print("\n-----------\n");
         System.out.print(" " + boardStatusAux[seventhCell] + " | ");
-        System.out.print(boardStatusAux[octaveCell] + " | ");
+        System.out.print(boardStatusAux[eigthCell] + " | ");
         System.out.print(boardStatusAux[ninthCell]);
         System.out.print("\n");
     }

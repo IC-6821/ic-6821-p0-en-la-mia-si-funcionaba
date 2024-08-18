@@ -2,7 +2,7 @@ package players;
 
 import board.GameBoard;
 
-public class MediumDifficulty implements Difficulty{
+public class MediumDifficulty implements Difficulty {
 
     @Override
     public int[] makeMove(GameBoard board) {
