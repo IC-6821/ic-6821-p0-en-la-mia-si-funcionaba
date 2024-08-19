@@ -13,8 +13,8 @@ public class Game {
 
     private final UI gameUI;
     private final GameBoard gameBoard;
-    private Player humanPlayer;
-    private Player computerPlayer;
+    private final Player humanPlayer;
+    private final Player computerPlayer;
 
     private final int humanPlayerInvalidMoveExpection = 001;
     private final int humanPlayerMoveOccupiedException = 002;
@@ -42,9 +42,11 @@ public class Game {
         int gameResult = 0;
         boolean activeGame = true;
         while (activeGame) {
-            showGame();
+
 
             if (humanPlayerTurn) {
+                showGame();
+
                 humanPlayerMove('X');
 
             } else {
@@ -60,6 +62,8 @@ public class Game {
             humanPlayerTurn = !humanPlayerTurn;
 
         }
+
+        showGame();
 
         switch (gameResult) {
             case humanPlayerWinResult:
