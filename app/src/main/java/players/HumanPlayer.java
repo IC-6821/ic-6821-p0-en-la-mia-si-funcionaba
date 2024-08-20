@@ -2,10 +2,8 @@ package players;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 import board.GameBoard;
-import gameuserinterface.TerminalUI;
 import gameuserinterface.UI;
 
 public class HumanPlayer implements Player {
@@ -20,7 +18,6 @@ public class HumanPlayer implements Player {
         RIGHT
     }
 
-    private final Scanner scanner;
     private final UI gameUI;
     private Map<String, Integer> rowPositions = new HashMap<>();
     private Map<String, Integer> colPositions = new HashMap<>();
@@ -36,9 +33,8 @@ public class HumanPlayer implements Player {
     private static final int ERROR_POSITION_OCCUPIED = 002;
     private static final int ERROR_INVALID_POSITION = 003;
 
-    public HumanPlayer(final char symbol, UI gameUI ) {
+    public HumanPlayer(final UI gameUI) {
         this.gameUI = gameUI;
-        this.scanner = new Scanner(System.in);
 
         this.rowPositions = Map.of(
                 POS_ROW_TOP, BoardRow.TOP.ordinal(),
