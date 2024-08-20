@@ -9,6 +9,9 @@ public class TerminalUI implements UI {
     private final Scanner scanner;
     private Map<String, Integer> positions = new HashMap<>();
 
+    private final int maxRow;
+    private final int maxColumn;
+
     private final int firstCell = 0;
     private final int secondCell = 1;
     private final int thirdCell = 2;
@@ -30,10 +33,10 @@ public class TerminalUI implements UI {
     private static final int ERROR_POSITION_OCCUPIED = 002;
     private static final int ERROR_INVALID_POSITION = 003;
 
-    public TerminalUI() {
+    public TerminalUI(final int maxRow, final int maxColumn) {
         this.scanner = new Scanner(System.in);
-
-        // We add the positions with their respective value.
+        this.maxRow = maxRow;
+        this.maxColumn = maxColumn;
 
         this.positions = Map.of(
                 POS_ROW_TOP, 0,
@@ -118,19 +121,27 @@ public class TerminalUI implements UI {
      */
     @Override
     public void showGame(String boardCellsToString) {
-
+        final int symbolFormatSpacer = 3;
+        final int horizontalLine = (maxRow * symbolFormatSpacer) + (maxRow - 1);
         final String[] boardStatusAux = boardCellsToString.split("");
-        System.out.print(" " + boardStatusAux[firstCell] + " | ");
-        System.out.print(boardStatusAux[secondCell] + " | ");
-        System.out.print(boardStatusAux[thirdCell]);
-        System.out.print("\n-----------\n");
-        System.out.print(" " + boardStatusAux[fourthCell] + " | ");
-        System.out.print(boardStatusAux[fifthCell] + " | ");
-        System.out.print(boardStatusAux[sixthCell]);
-        System.out.print("\n-----------\n");
-        System.out.print(" " + boardStatusAux[seventhCell] + " | ");
-        System.out.print(boardStatusAux[eigthCell] + " | ");
-        System.out.print(boardStatusAux[ninthCell]);
+
         System.out.print("\n");
+        for (int i = 0; i < maxRow; i++) {
+            for (int j = 0; j < maxColumn; j++) {
+                if (j > 0) {
+                    System.out.print("|");
+                }
+
+                final int stringToMatrixIndex = (i * maxRow) + j;
+                System.out.print(" " + boardStatusAux[stringToMatrixIndex] + " ");
+            }
+
+            if (i < maxRow - 1) {
+                System.out.print("\n" + "-".repeat(horizontalLine) + "\n");
+            }
+
+        }
+        System.out.print("\n\n> ");
+
     }
 }

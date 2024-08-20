@@ -28,9 +28,9 @@ public class Game {
     private boolean humanPlayerTurn = true;
 
     public Game(final String difficulty) {
-        this.gameUI = new TerminalUI();
+        this.gameUI = new TerminalUI(MAX_ROW, MAX_COLUMN);
         this.gameBoard = new DefaultGameBoard(MAX_ROW, MAX_COLUMN);
-        this.humanPlayer = new HumanPlayer('X');
+        this.humanPlayer = new HumanPlayer('X', gameUI);
         this.computerPlayer = new ComputerPlayer('O', difficulty, MAX_ROW, MAX_COLUMN);
         // function "String[] args"
     }

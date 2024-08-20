@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import board.GameBoard;
 import gameuserinterface.TerminalUI;
+import gameuserinterface.UI;
 
 public class HumanPlayer implements Player {
     private enum BoardRow {
@@ -20,7 +21,7 @@ public class HumanPlayer implements Player {
     }
 
     private final Scanner scanner;
-    private final TerminalUI gameUI;
+    private final UI gameUI;
     private Map<String, Integer> rowPositions = new HashMap<>();
     private Map<String, Integer> colPositions = new HashMap<>();
     private boolean validMove;
@@ -35,8 +36,8 @@ public class HumanPlayer implements Player {
     private static final int ERROR_POSITION_OCCUPIED = 002;
     private static final int ERROR_INVALID_POSITION = 003;
 
-    public HumanPlayer(final char symbol) {
-        this.gameUI = new TerminalUI();
+    public HumanPlayer(final char symbol, UI gameUI ) {
+        this.gameUI = gameUI;
         this.scanner = new Scanner(System.in);
 
         this.rowPositions = Map.of(
@@ -62,8 +63,7 @@ public class HumanPlayer implements Player {
         validMove = false;
 
         while (!validMove) {
-            final String input = scanner.nextLine().toLowerCase();
-            final String[] parts = input.split(" ");
+            final String[] parts = gameUI.readHumanPlayerInput();
 
             if (parts.length == 2) {
                 row = rowPositions.getOrDefault(parts[0], -1);
