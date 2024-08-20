@@ -32,8 +32,14 @@ public class DefaultGameBoard implements GameBoard {
 
     private boolean checkRowWin(char playerPiece) {
         for (int row = 0; row < maxRow; row++) {
-            if (gameBoard[row][0] == playerPiece && gameBoard[row][1] == playerPiece
-                    && gameBoard[row][2] == playerPiece) {
+            boolean rowWin = true;
+            for (int column = 0; column < maxColumn; column++) {
+                if (gameBoard[row][column] != playerPiece) {
+                    rowWin = false;
+                    break;
+                }
+            }
+            if (rowWin) {
                 return true;
             }
         }
@@ -42,8 +48,14 @@ public class DefaultGameBoard implements GameBoard {
 
     private boolean checkColumnWin(char playerPiece) {
         for (int column = 0; column < maxColumn; column++) {
-            if (gameBoard[0][column] == playerPiece && gameBoard[1][column] == playerPiece
-                    && gameBoard[2][column] == playerPiece) {
+            boolean columnWin = true;
+            for (int row = 0; row < maxRow; row++) {
+                if (gameBoard[row][column] != playerPiece) {
+                    columnWin = false;
+                    break;
+                }
+            }
+            if (columnWin) {
                 return true;
             }
         }
