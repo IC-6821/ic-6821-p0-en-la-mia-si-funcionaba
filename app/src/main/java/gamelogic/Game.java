@@ -1,5 +1,6 @@
 package gamelogic;
 
+import board.DefaultGameBoard;
 import board.GameBoard;
 import players.ComputerPlayer;
 import players.HumanPlayer;
@@ -28,7 +29,7 @@ public class Game {
 
     public Game(final String difficulty) {
         this.gameUI = new TerminalUI();
-        this.gameBoard = new GameBoard(MAX_ROW, MAX_COLUMN);
+        this.gameBoard = new DefaultGameBoard(MAX_ROW, MAX_COLUMN);
         this.humanPlayer = new HumanPlayer('X');
         this.computerPlayer = new ComputerPlayer('O', difficulty, MAX_ROW, MAX_COLUMN);
         // function "String[] args"
