@@ -12,16 +12,6 @@ public class TerminalUI implements UI {
     private final int maxRow;
     private final int maxColumn;
 
-    private final int firstCell = 0;
-    private final int secondCell = 1;
-    private final int thirdCell = 2;
-    private final int fourthCell = 3;
-    private final int fifthCell = 4;
-    private final int sixthCell = 5;
-    private final int seventhCell = 6;
-    private final int eigthCell = 7;
-    private final int ninthCell = 8;
-
 
     private static final String POS_ROW_TOP = "arriba";
     private static final String POS_ROW_MIDDLE = "medio";
